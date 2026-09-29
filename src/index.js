@@ -17,17 +17,22 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve modern interactive frontend
+app.use(express.static("public"));
+
 // Mount Routes
 app.use("/api/v1/jobs", jobsRouter);
 
-// Root informational endpoint
-app.get("/", (req, res) => {
+// API informational endpoint (for programmatic JSON inspection)
+app.get("/api", (req, res) => {
   res.json({
     name: "JobPulse API",
     version: "1.0.0",
     docs: "See README.md for runnable curls and API specifications",
     endpoints: [
       "GET  /api/v1/jobs/health",
+      "GET  /api/v1/jobs/list",
+      "GET  /api/v1/jobs/report",
       "POST /api/v1/jobs/triage",
       "POST /api/v1/jobs/batch-triage"
     ]

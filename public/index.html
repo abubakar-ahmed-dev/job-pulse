@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobPulse ⚡ Polite Ingestion & Semantic Triage</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <span class="logo-icon">⚡</span>
+        <div>
+          <h1 class="logo-title">JobPulse</h1>
+          <p class="logo-sub">Polite Web Ingestion &amp; Production-Guarded LLM Triage</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div id="status-pill" class="status-pill status-connecting">
+          <span class="status-dot"></span>
+          <span id="status-text">Connecting...</span>
+        </div>
+        <a href="https://github.com/abubakar-ahmed-dev/job-pulse" target="_blank" rel="noopener" class="github-btn">
+          <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-bar">
+    <div class="nav-container">
+      <button class="nav-tab active" data-tab="playground">
+        <span class="tab-icon">🧪</span> Semantic Triage Playground
+      </button>
+      <button class="nav-tab" data-tab="explorer">
+        <span class="tab-icon">📂</span> Scraped Jobs Explorer
+      </button>
+      <button class="nav-tab" data-tab="observability">
+        <span class="tab-icon">📊</span> System Observability &amp; Cost
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    
+    <!-- TAB 1: Semantic Triage Playground -->
+    <section id="tab-playground" class="tab-panel active">
+      <div class="panel-header">
+        <h2>Live Semantic Triage Playground</h2>
+        <p>Test the production-guarded LLM triage endpoint (<code>POST /api/v1/jobs/triage</code>) with custom job descriptions or pre-built adversarial benchmarks.</p>
+      </div>
+
+      <!-- Presets bar -->
+      <div class="presets-section">
+        <span class="presets-label">⚡ Quick Presets:</span>
+        <div class="preset-buttons">
+          <button class="preset-btn" data-preset="senior-backend">🚀 Senior Backend (Go/Kafka)</button>
+          <button class="preset-btn" data-preset="junior-frontend">💻 Junior Frontend (React)</button>
+          <button class="preset-btn" data-preset="lead-devops">☁️ Staff SRE / DevOps</button>
+          <button class="preset-btn" data-preset="prompt-injection">🛡️ Prompt Injection Attack</button>
+          <button class="preset-btn" data-preset="ambiguous">❓ Ambiguous / Unsure</button>
+        </div>
+      </div>
+
+      <div class="playground-grid">
+        <!-- Input Form -->
+        <div class="card form-card">
+          <h3 class="card-title">Job Input Payload</h3>
+          <form id="triage-form">
+            <div class="form-group">
+              <label for="job-title">Job Title <span class="required">*</span></label>
+              <input type="text" id="job-title" name="title" required placeholder="e.g. Senior Backend Engineer" minlength="3" maxlength="200">
+            </div>
+
+            <div class="form-group">
+              <label for="job-company">Company Name (Optional)</label>
+              <input type="text" id="job-company" name="company" placeholder="e.g. CloudStream Technologies" maxlength="100">
+            </div>
+
+            <div class="form-group">
+              <label for="job-description">Job Description <span class="required">*</span></label>
+              <textarea id="job-description" name="description" rows="8" required placeholder="Paste full or excerpted job description text here..." minlength="20" maxlength="15000"></textarea>
+              <span class="char-hint">Minimum 20 characters, maximum 15,000</span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="submit-btn" class="btn btn-primary">
+                <span class="btn-spinner hidden"></span>
+                <span class="btn-text">⚡ Triage with Guarded LLM</span>
+              </button>
+              <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Triage Results Card -->
+        <div class="card result-card">
+          <div class="result-header">
+            <h3 class="card-title">Semantic Decision Contract</h3>
+            <div id="result-meta" class="result-meta hidden">
+              <span id="result-mode-badge" class="badge badge-stub">STUB</span>
+              <span id="result-duration" class="meta-duration">0ms</span>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div id="result-empty" class="result-empty">
+            <div class="empty-icon">🤖</div>
+            <p class="empty-text">Fill the form and submit or pick a preset above to run guarded semantic classification.</p>
+          </div>
+
+          <!-- Active Output -->
+          <div id="result-content" class="result-content hidden">
+            <!-- Categorical Enums Grid -->
+            <div class="badges-grid">
+              <div class="badge-item">
+                <span class="badge-label">Seniority</span>
+                <span id="badge-seniority" class="enum-badge badge-seniority">-</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-label">Domain</span>
+                <span id="badge-domain" class="enum-badge badge-domain">-</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-label">Workplace</span>
+                <span id="badge-workplace" class="enum-badge badge-workplace">-</span>
+              </div>
+              <div class="badge-item">
+                <span class="badge-label">Visa Sponsorship</span>
+                <span id="badge-visa" class="enum-badge badge-visa">-</span>
+              </div>
+            </div>
+
+            <!-- Confidence Meter -->
+            <div class="meter-section">
+              <div class="meter-header">
+                <span class="meter-title">Classification Confidence</span>
+                <span id="confidence-val" class="meter-val">0%</span>
+              </div>
+              <div class="meter-track">
+                <div id="confidence-bar" class="meter-fill" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Normalized Tech Stack -->
+            <div class="tech-section">
+              <span class="section-label">Normalized Tech Stack:</span>
+              <div id="tech-chips" class="tech-chips">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="summary-section">
+              <span class="section-label">Executive Duty Summary:</span>
+              <p id="summary-text" class="summary-box">-</p>
+            </div>
+
+            <!-- Rationale -->
+            <div class="reason-section">
+              <span class="section-label">Classification Rationale:</span>
+              <p id="reason-text" class="reason-box">-</p>
+            </div>
+
+            <!-- Raw JSON Drawer -->
+            <details class="json-drawer">
+              <summary>View Validated JSON Object</summary>
+              <pre id="raw-json-block"><code></code></pre>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: Scraped Jobs Explorer -->
+    <section id="tab-explorer" class="tab-panel">
+      <div class="panel-header explorer-header">
+        <div>
+          <h2>Scraped Jobs Explorer</h2>
+          <p>Authentic tech job postings harvested politely from WeWorkRemotely with full provenance receipts.</p>
+        </div>
+        <div class="explorer-actions">
+          <button id="batch-triage-btn" class="btn btn-accent">
+            <span class="btn-spinner hidden"></span>
+            <span>⚡ Enrich All with AI</span>
+          </button>
+          <button id="refresh-jobs-btn" class="btn btn-secondary">🔄 Refresh</button>
+        </div>
+      </div>
+
+      <!-- Filters Bar -->
+      <div class="filters-bar card">
+        <div class="search-input-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="job-search" placeholder="Search by job title, company, or keyword...">
+        </div>
+        <div class="filter-dropdowns">
+          <select id="filter-domain">
+            <option value="all">All Domains</option>
+            <option value="backend">Backend</option>
+            <option value="frontend">Frontend</option>
+            <option value="fullstack">Fullstack</option>
+            <option value="devops_cloud">DevOps / Cloud</option>
+            <option value="data_ai">Data &amp; AI</option>
+            <option value="mobile">Mobile</option>
+            <option value="security">Security</option>
+            <option value="other">Other</option>
+          </select>
+          <select id="filter-seniority">
+            <option value="all">All Seniorities</option>
+            <option value="junior">Junior</option>
+            <option value="mid">Mid-Level</option>
+            <option value="senior">Senior</option>
+            <option value="lead">Lead / Staff</option>
+          </select>
+        </div>
+        <div class="count-pill">
+          Showing <span id="jobs-count">0</span> jobs
+        </div>
+      </div>
+
+      <!-- Jobs Grid -->
+      <div id="jobs-grid" class="jobs-grid">
+        <div class="loading-state">Loading scraped jobs...</div>
+      </div>
+    </section>
+
+    <!-- TAB 3: System Observability & Cost -->
+    <section id="tab-observability" class="tab-panel">
+      <div class="panel-header">
+        <h2>System Observability &amp; Token Economics</h2>
+        <p>Real-time telemetry, crawler performance receipts, and production cost projections (W7 Stage 4 &amp; 5).</p>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- System Health Card -->
+        <div class="card metric-card">
+          <h3 class="card-title">LLM Provider Telemetry</h3>
+          <div class="metric-list">
+            <div class="metric-row">
+              <span class="metric-name">Provider URL</span>
+              <span id="metric-provider" class="metric-val mono">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Active Model</span>
+              <span id="metric-model" class="metric-val mono">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Stub Mode (Zero-Cost)</span>
+              <span id="metric-stub" class="badge">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Emergency Kill Switch</span>
+              <span id="metric-kill" class="badge">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Client Timeout</span>
+              <span class="metric-val mono">30,000 ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scraper Run Report -->
+        <div class="card metric-card">
+          <h3 class="card-title">Latest Scraper Run Receipt (W5)</h3>
+          <div class="metric-list">
+            <div class="metric-row">
+              <span class="metric-name">Target Sandbox</span>
+              <span id="metric-target" class="metric-val small-text mono">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Valid Records Stored</span>
+              <span id="metric-valid-records" class="metric-val highlight">0</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Cache Hits Ratio</span>
+              <span id="metric-cache-hits" class="metric-val">-</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Failed / Dead Pages</span>
+              <span id="metric-failed-pages" class="metric-val">0</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-name">Total Run Duration</span>
+              <span id="metric-duration" class="metric-val mono">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Token Economics Calculator -->
+      <div class="card calculator-card">
+        <h3 class="card-title">💰 Production Token Economics Calculator</h3>
+        <p class="calc-subtitle">Estimate operational API expenses at scale based on JobPulse's empirical token metrics (~420 input tokens, ~95 output tokens per triage).</p>
+
+        <div class="calculator-body">
+          <div class="slider-group">
+            <div class="slider-header">
+              <label for="volume-slider">Daily Job Ingestion Volume:</label>
+              <span id="volume-display" class="volume-val">10,000 requests / day</span>
+            </div>
+            <input type="range" id="volume-slider" min="1000" max="100000" step="1000" value="10000">
+            <div class="slider-ticks">
+              <span>1k</span>
+              <span>25k</span>
+              <span>50k</span>
+              <span>75k</span>
+              <span>100k</span>
+            </div>
+          </div>
+
+          <div class="cost-summary-grid">
+            <div class="cost-box">
+              <span class="cost-label">Daily Input Tokens</span>
+              <span id="calc-input-tokens" class="cost-number">4,200,000</span>
+              <span class="cost-rate">@ $0.15 / 1M tokens</span>
+            </div>
+            <div class="cost-box">
+              <span class="cost-label">Daily Output Tokens</span>
+              <span id="calc-output-tokens" class="cost-number">950,000</span>
+              <span class="cost-rate">@ $0.60 / 1M tokens</span>
+            </div>
+            <div class="cost-box highlight-box">
+              <span class="cost-label">Estimated Daily Cost</span>
+              <span id="calc-daily-cost" class="cost-number cost-total">$1.20</span>
+              <span class="cost-rate">USD / day</span>
+            </div>
+            <div class="cost-box highlight-box">
+              <span class="cost-label">Estimated Monthly Cost</span>
+              <span id="calc-monthly-cost" class="cost-number cost-total">$36.00</span>
+              <span class="cost-rate">30 days projection</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>JobPulse &copy; 2026 Abubakar Ahmed &middot; Built for FlyRank Backend Track &middot; Licensed under MIT</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

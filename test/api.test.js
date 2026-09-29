@@ -1,4 +1,4 @@
-﻿import { describe, it } from "node:test";
+import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import app from "../src/index.js";
 import { TriageResponseSchema } from "../src/schemas/triageSchema.js";
@@ -131,5 +131,19 @@ describe("W7 LLM Guarded API Test Suite", () => {
     assert.equal(result.seniority, "lead");
     assert.equal(result.domain, "frontend");
     assert.ok(result.reason.length > 0);
+  });
+
+  it("6. Explorer Endpoint: GET /api/v1/jobs/list returns jobs array", async () => {
+    const res = await request(app).get("/api/v1/jobs/list");
+    assert.equal(res.status, 200);
+    assert.ok(Array.isArray(res.body.jobs));
+    assert.ok(typeof res.body.total === "number");
+  });
+
+  it("7. Observability Endpoint: GET /api/v1/jobs/report returns run report metrics", async () => {
+    const res = await request(app).get("/api/v1/jobs/report");
+    assert.equal(res.status, 200);
+    assert.ok(res.body.target);
+    assert.ok(typeof res.body.valid_records === "number");
   });
 });

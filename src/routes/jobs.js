@@ -117,3 +117,44 @@ jobsRouter.post("/batch-triage", async (req, res) => {
     res.status(500).json({ error: "Failed to run batch triage", message: err.message });
   }
 });
+
+/**
+ * Explorer API: Get scraped & enriched job records
+ * GET /api/v1/jobs/list
+ */
+jobsRouter.get("/list", async (req, res) => {
+  const enrichedPath = path.join(config.outputDir, "jobs-enriched.json");
+  const rawPath = path.join(config.outputDir, "jobs.json");
+
+  try {
+    // Prefer enriched records if available
+    try {
+      const data = await fs.readFile(enrichedPath, "utf-8");
+      const jobs = JSON.parse(data.replace(/^\uFEFF/, ""));
+      return res.json({ jobs, source: "enriched", total: jobs.length });
+    } catch (e) {
+      // Fallback to raw validated records
+      const data = await fs.readFile(rawPath, "utf-8");
+      const jobs = JSON.parse(data.replace(/^\uFEFF/, ""));
+      return res.json({ jobs, source: "scraped", total: jobs.length });
+    }
+  } catch (err) {
+    return res.json({ jobs: [], source: "none", total: 0 });
+  }
+});
+
+/**
+ * Observability API: Get the latest crawler run report
+ * GET /api/v1/jobs/report
+ */
+jobsRouter.get("/report", async (req, res) => {
+  const reportPath = path.join(config.outputDir, "run-report.json");
+  try {
+    const data = await fs.readFile(reportPath, "utf-8");
+    const report = JSON.parse(data.replace(/^\uFEFF/, ""));
+    res.json(report);
+  } catch (err) {
+    res.status(404).json({ error: "No run report available yet", message: err.message });
+  }
+});
+
