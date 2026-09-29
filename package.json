@@ -1,0 +1,41 @@
+﻿{
+  "name": "job-pulse",
+  "version": "1.0.0",
+  "description": "Polite Web Ingestion Pipeline & Production-Guarded LLM Triage Engine",
+  "main": "src/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/index.js",
+    "dev": "node --watch --env-file=.env src/index.js",
+    "scrape": "node --env-file=.env src/scraper/cli.js",
+    "scrape:fixture": "USE_FIXTURES=1 node --env-file=.env src/scraper/cli.js",
+    "test": "node --test --env-file=.env test/**/*.test.js",
+    "eval": "node --env-file=.env evals/runEval.js",
+    "eval:stub": "LLM_STUB=1 node --env-file=.env evals/runEval.js",
+    "pipeline": "node --env-file=.env src/pipeline.js"
+  },
+  "keywords": [
+    "web-scraper",
+    "llm",
+    "fastapi",
+    "express",
+    "openai",
+    "openrouter",
+    "ollama",
+    "zod",
+    "cheerio",
+    "data-pipeline"
+  ],
+  "author": "Abubakar Ahmed <abubakar.ahmed.dev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "openai": "^4.86.1",
+    "zod": "^3.24.2"
+  }
+}
