@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "job-pulse",
   "version": "1.0.0",
   "description": "Polite Web Ingestion Pipeline & Production-Guarded LLM Triage Engine",
@@ -11,10 +11,10 @@
     "start": "node --env-file=.env src/index.js",
     "dev": "node --watch --env-file=.env src/index.js",
     "scrape": "node --env-file=.env src/scraper/cli.js",
-    "scrape:fixture": "USE_FIXTURES=1 node --env-file=.env src/scraper/cli.js",
+    "scrape:fixture": "node --env-file=.env src/scraper/cli.js --fixtures",
     "test": "node --test --env-file=.env test/**/*.test.js",
     "eval": "node --env-file=.env evals/runEval.js",
-    "eval:stub": "LLM_STUB=1 node --env-file=.env evals/runEval.js",
+    "eval:stub": "node --env-file=.env evals/runEval.js --stub",
     "pipeline": "node --env-file=.env src/pipeline.js"
   },
   "keywords": [

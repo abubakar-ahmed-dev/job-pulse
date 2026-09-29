@@ -1,0 +1,167 @@
+[
+  {
+    "id": "b81a062332004baa",
+    "canonical_url": "https://weworkremotely.com/remote-jobs/acme-senior-backend-engineer",
+    "title": "Senior Backend Engineer",
+    "company": "Acme Corp",
+    "location": "San Francisco, CA (Remote)",
+    "is_remote": true,
+    "job_type": "Full-Time",
+    "salary_min_usd": 140000,
+    "salary_max_usd": 180000,
+    "salary_raw": "$140,000 - $180,000 USD",
+    "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
+    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
+    "fetched_at": "2026-09-29T19:03:35.740Z",
+    "normalized_at": "2026-09-29T19:03:35.741Z",
+    "triage": {
+      "seniority": "senior",
+      "domain": "backend",
+      "workplace_type": "fully_remote",
+      "visa_sponsorship": "unspecified",
+      "tech_stack": [
+        "Node.js",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "confidence": 0.95,
+      "one_sentence_summary": "Software engineering role: Senior Backend Engineer at Acme Corp.",
+      "reason": "Deterministic response generated in stub mode (LLM_STUB=1)."
+    },
+    "triage_metrics": {
+      "prompt_version": "v1"
+    }
+  },
+  {
+    "id": "425814a881ed356a",
+    "canonical_url": "https://weworkremotely.com/remote-jobs/globex-lead-frontend-developer",
+    "title": "Stealth AI Researcher",
+    "company": "Stealth Lab",
+    "location": "Remote Worldwide",
+    "is_remote": true,
+    "job_type": "Contract",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": null,
+    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
+    "fetched_at": "2026-09-29T19:03:35.751Z",
+    "normalized_at": "2026-09-29T19:03:35.751Z",
+    "triage": {
+      "seniority": "unspecified",
+      "domain": "data_ai",
+      "workplace_type": "fully_remote",
+      "visa_sponsorship": "unspecified",
+      "tech_stack": [
+        "Node.js",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "confidence": 0.95,
+      "one_sentence_summary": "Software engineering role: Stealth AI Researcher at Stealth Lab.",
+      "reason": "Deterministic response generated in stub mode (LLM_STUB=1)."
+    },
+    "triage_metrics": {
+      "prompt_version": "v1"
+    }
+  },
+  {
+    "id": "0ac6086297cb5abd",
+    "canonical_url": "https://weworkremotely.com/remote-jobs/initech-junior-qa-engineer",
+    "title": "Senior Backend Engineer",
+    "company": "Acme Corp",
+    "location": "San Francisco, CA (Remote)",
+    "is_remote": true,
+    "job_type": "Full-Time",
+    "salary_min_usd": 140000,
+    "salary_max_usd": 180000,
+    "salary_raw": "$140,000 - $180,000 USD",
+    "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
+    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
+    "fetched_at": "2026-09-29T19:03:35.757Z",
+    "normalized_at": "2026-09-29T19:03:35.757Z",
+    "triage": {
+      "seniority": "senior",
+      "domain": "backend",
+      "workplace_type": "fully_remote",
+      "visa_sponsorship": "unspecified",
+      "tech_stack": [
+        "Node.js",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "confidence": 0.95,
+      "one_sentence_summary": "Software engineering role: Senior Backend Engineer at Acme Corp.",
+      "reason": "Deterministic response generated in stub mode (LLM_STUB=1)."
+    },
+    "triage_metrics": {
+      "prompt_version": "v1"
+    }
+  },
+  {
+    "id": "7263e80783003f6e",
+    "canonical_url": "https://weworkremotely.com/remote-jobs/fake-nonexistent-job-404-test",
+    "title": "Senior Backend Engineer",
+    "company": "Acme Corp",
+    "location": "San Francisco, CA (Remote)",
+    "is_remote": true,
+    "job_type": "Full-Time",
+    "salary_min_usd": 140000,
+    "salary_max_usd": 180000,
+    "salary_raw": "$140,000 - $180,000 USD",
+    "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
+    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
+    "fetched_at": "2026-09-29T19:03:12.424Z",
+    "normalized_at": "2026-09-29T19:03:12.424Z",
+    "triage": {
+      "seniority": "senior",
+      "domain": "backend",
+      "workplace_type": "fully_remote",
+      "visa_sponsorship": "unspecified",
+      "tech_stack": [
+        "Node.js",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "confidence": 0.95,
+      "one_sentence_summary": "Software engineering role: Senior Backend Engineer at Acme Corp.",
+      "reason": "Deterministic response generated in stub mode (LLM_STUB=1)."
+    },
+    "triage_metrics": {
+      "prompt_version": "v1"
+    }
+  },
+  {
+    "id": "10fcf7092b01bbc1",
+    "canonical_url": "https://weworkremotely.com/remote-jobs/toggl-senior-full-stack",
+    "title": "Senior Full Stack",
+    "company": "Toptal",
+    "location": "Remote",
+    "is_remote": true,
+    "job_type": "Full-Time",
+    "salary_min_usd": 100000,
+    "salary_max_usd": null,
+    "salary_raw": "$100,000 or more USD",
+    "description": null,
+    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
+    "fetched_at": "2026-09-29T19:30:37.012Z",
+    "normalized_at": "2026-09-29T19:30:37.016Z",
+    "triage": {
+      "seniority": "senior",
+      "domain": "fullstack",
+      "workplace_type": "fully_remote",
+      "visa_sponsorship": "unspecified",
+      "tech_stack": [
+        "Node.js",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "confidence": 0.95,
+      "one_sentence_summary": "Software engineering role: Senior Full Stack at Toptal.",
+      "reason": "Deterministic response generated in stub mode (LLM_STUB=1)."
+    },
+    "triage_metrics": {
+      "prompt_version": "v1"
+    }
+  }
+]
