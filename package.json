@@ -12,7 +12,7 @@
     "dev": "node --watch --env-file=.env src/index.js",
     "scrape": "node --env-file=.env src/scraper/cli.js",
     "scrape:fixture": "node --env-file=.env src/scraper/cli.js --fixtures",
-    "test": "node --test --env-file=.env test/**/*.test.js",
+    "test": "node --test --env-file=.env",
     "eval": "node --env-file=.env evals/runEval.js",
     "eval:stub": "node --env-file=.env evals/runEval.js --stub",
     "pipeline": "node --env-file=.env src/pipeline.js"
