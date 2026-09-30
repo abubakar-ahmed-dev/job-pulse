@@ -1,6 +1,6 @@
 ﻿// ==============================================================================
-// JobPulse Frontend Application Controller
-// Vanilla ES2024 JavaScript - Zero Dependencies
+// JobPulse Frontend Controller
+// Pure ES2024 Vanilla JS - Zero External Frameworks
 // ==============================================================================
 
 const PRESETS = {
@@ -31,19 +31,22 @@ const PRESETS = {
   }
 };
 
-let allJobs = [];
+let marketJobs = [];
 
-// ==============================================================================
-// Initialization & Tab Controller
-// ==============================================================================
 document.addEventListener("DOMContentLoaded", () => {
   initTabs();
-  initPlayground();
-  initExplorer();
-  initObservability();
-  checkHealth();
+  initRadarFeed();
+  initTriageStudio();
+  initTelemetryAndCalc();
+  checkSystemHealth();
+  
+  // Load initial feed on boot
+  loadRadarData();
 });
 
+// ==============================================================================
+// Navigation & Tabs Controller
+// ==============================================================================
 function initTabs() {
   const tabs = document.querySelectorAll(".nav-tab");
   tabs.forEach((tab) => {
@@ -51,192 +54,64 @@ function initTabs() {
       tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
 
-      const targetTab = tab.getAttribute("data-tab");
+      const targetId = `tab-${tab.getAttribute("data-tab")}`;
       document.querySelectorAll(".tab-panel").forEach((panel) => {
         panel.classList.remove("active");
       });
-      document.getElementById(`tab-${targetTab}`).classList.add("active");
+      document.getElementById(targetId)?.classList.add("active");
 
-      if (targetTab === "explorer" && allJobs.length === 0) {
-        loadExplorerJobs();
-      }
-      if (targetTab === "observability") {
-        loadObservabilityData();
+      if (targetId === "tab-telemetry") {
+        fetchTelemetryMetrics();
       }
     });
   });
 }
 
 // ==============================================================================
-// Health Check
+// Health Status Check
 // ==============================================================================
-async function checkHealth() {
-  const statusPill = document.getElementById("status-pill");
-  const statusText = document.getElementById("status-text");
+async function checkSystemHealth() {
+  const label = document.getElementById("telemetry-label");
+  const dot = document.querySelector(".telemetry-dot");
 
   try {
     const res = await fetch("/api/v1/jobs/health");
-    if (!res.ok) throw new Error("Health check failed");
+    if (!res.ok) throw new Error("Offline");
     const data = await res.json();
-
-    statusPill.className = "status-pill status-online";
-    statusText.textContent = data.llm?.stub_mode ? "Online (Stub Mode)" : `Online (${data.llm?.model})`;
+    label.textContent = data.llm?.stub_mode ? "Core: Stub Mode" : `Core: ${data.llm?.model}`;
+    dot.style.backgroundColor = "var(--signal-green)";
   } catch (err) {
-    statusPill.className = "status-pill status-offline";
-    statusText.textContent = "Server Offline";
+    label.textContent = "Core Offline";
+    dot.style.backgroundColor = "var(--signal-red)";
   }
 }
 
 // ==============================================================================
-// TAB 1: Semantic Triage Playground
+// TAB 1: Market Radar Feed Controller
 // ==============================================================================
-function initPlayground() {
-  const form = document.getElementById("triage-form");
-  const titleInput = document.getElementById("job-title");
-  const companyInput = document.getElementById("job-company");
-  const descInput = document.getElementById("job-description");
-  const submitBtn = document.getElementById("submit-btn");
-  const clearBtn = document.getElementById("clear-btn");
-  const spinner = submitBtn.querySelector(".btn-spinner");
-  const btnText = submitBtn.querySelector(".btn-text");
-
-  // Preset Buttons
-  document.querySelectorAll(".preset-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const presetKey = btn.getAttribute("data-preset");
-      const preset = PRESETS[presetKey];
-      if (preset) {
-        titleInput.value = preset.title;
-        companyInput.value = preset.company;
-        descInput.value = preset.description;
-        titleInput.focus();
-      }
-    });
-  });
-
-  // Clear Form
-  clearBtn.addEventListener("click", () => {
-    form.reset();
-    document.getElementById("result-content").classList.add("hidden");
-    document.getElementById("result-empty").classList.remove("hidden");
-    document.getElementById("result-meta").classList.add("hidden");
-  });
-
-  // Form Submit
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const payload = {
-      title: titleInput.value.trim(),
-      company: companyInput.value.trim() || undefined,
-      description: descInput.value.trim()
-    };
-
-    // UI Loading State
-    submitBtn.disabled = true;
-    spinner.classList.remove("hidden");
-    btnText.textContent = "Processing with LLM...";
-
-    const startTime = performance.now();
-
-    try {
-      const res = await fetch("/api/v1/jobs/triage", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-      const elapsed = Math.round(performance.now() - startTime);
-
-      if (!res.ok) {
-        alert(`Error (${res.status}): ${data.error || "Triage failed"}\n${JSON.stringify(data.details || {})}`);
-        return;
-      }
-
-      renderTriageResult(data, elapsed, res.headers.get("X-LLM-Stub") === "true");
-    } catch (err) {
-      alert(`Network error connecting to JobPulse API: ${err.message}`);
-    } finally {
-      submitBtn.disabled = false;
-      spinner.classList.add("hidden");
-      btnText.textContent = "⚡ Triage with Guarded LLM";
-    }
-  });
-}
-
-function renderTriageResult(data, durationMs, isStub) {
-  document.getElementById("result-empty").classList.add("hidden");
-  const resultCard = document.getElementById("result-content");
-  resultCard.classList.remove("hidden");
-
-  // Metadata
-  const resultMeta = document.getElementById("result-meta");
-  resultMeta.classList.remove("hidden");
-  document.getElementById("result-duration").textContent = `${durationMs}ms`;
-  const modeBadge = document.getElementById("result-mode-badge");
-  modeBadge.textContent = isStub ? "STUB MODE" : "LIVE LLM";
-  modeBadge.className = isStub ? "badge badge-stub" : "badge badge-seniority";
-
-  // Badges
-  document.getElementById("badge-seniority").textContent = data.seniority;
-  document.getElementById("badge-domain").textContent = data.domain.replace("_", " ");
-  document.getElementById("badge-workplace").textContent = data.workplace_type.replace("_", " ");
-  document.getElementById("badge-visa").textContent = data.visa_sponsorship.replace("_", " ");
-
-  // Confidence Meter
-  const pct = Math.round(data.confidence * 100);
-  document.getElementById("confidence-val").textContent = `${pct}%`;
-  document.getElementById("confidence-bar").style.width = `${pct}%`;
-
-  // Tech Chips
-  const techContainer = document.getElementById("tech-chips");
-  techContainer.innerHTML = "";
-  if (data.tech_stack && data.tech_stack.length > 0) {
-    data.tech_stack.forEach((tech) => {
-      const chip = document.createElement("span");
-      chip.className = "tech-chip";
-      chip.textContent = tech;
-      techContainer.appendChild(chip);
-    });
-  } else {
-    techContainer.innerHTML = '<span class="text-muted" style="font-size:0.8rem;">No specific technologies extracted</span>';
-  }
-
-  // Summary & Rationale
-  document.getElementById("summary-text").textContent = data.one_sentence_summary;
-  document.getElementById("reason-text").textContent = data.reason;
-
-  // Raw JSON
-  document.getElementById("raw-json-block").querySelector("code").textContent = JSON.stringify(data, null, 2);
-}
-
-// ==============================================================================
-// TAB 2: Scraped Jobs Explorer
-// ==============================================================================
-function initExplorer() {
-  const searchInput = document.getElementById("job-search");
+function initRadarFeed() {
+  const searchInput = document.getElementById("radar-search");
   const domainFilter = document.getElementById("filter-domain");
   const seniorityFilter = document.getElementById("filter-seniority");
-  const refreshBtn = document.getElementById("refresh-jobs-btn");
-  const batchBtn = document.getElementById("batch-triage-btn");
+  const refreshBtn = document.getElementById("radar-refresh-btn");
+  const batchBtn = document.getElementById("batch-enrich-btn");
 
-  searchInput.addEventListener("input", filterAndRenderJobs);
-  domainFilter.addEventListener("change", filterAndRenderJobs);
-  seniorityFilter.addEventListener("change", filterAndRenderJobs);
-  refreshBtn.addEventListener("click", loadExplorerJobs);
+  searchInput?.addEventListener("input", renderRadarFeed);
+  domainFilter?.addEventListener("change", renderRadarFeed);
+  seniorityFilter?.addEventListener("change", renderRadarFeed);
+  refreshBtn?.addEventListener("click", loadRadarData);
 
-  batchBtn.addEventListener("click", async () => {
+  batchBtn?.addEventListener("click", async () => {
     batchBtn.disabled = true;
-    const spinner = batchBtn.querySelector(".btn-spinner");
+    const spinner = batchBtn.querySelector(".spinner");
     spinner.classList.remove("hidden");
 
     try {
       const res = await fetch("/api/v1/jobs/batch-triage?limit=10", { method: "POST" });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Batch failed");
-      alert(`Batch Enrichment Complete! Enriched ${data.enriched_count} jobs.`);
-      await loadExplorerJobs();
+      if (!res.ok) throw new Error(data.message || "Failed");
+      alert(`Batch AI Enrichment Complete! Enriched ${data.enriched_count} positions.`);
+      await loadRadarData();
     } catch (err) {
       alert(`Batch error: ${err.message}`);
     } finally {
@@ -246,91 +121,98 @@ function initExplorer() {
   });
 }
 
-async function loadExplorerJobs() {
-  const grid = document.getElementById("jobs-grid");
-  grid.innerHTML = '<div class="loading-state">Loading scraped jobs...</div>';
+async function loadRadarData() {
+  const grid = document.getElementById("radar-grid");
+  grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">Syncing verified market data...</div>';
 
   try {
     const res = await fetch("/api/v1/jobs/list");
     const data = await res.json();
-    allJobs = data.jobs || [];
-    filterAndRenderJobs();
+    marketJobs = data.jobs || [];
+
+    // Update counts
+    const totalCount = marketJobs.length;
+    document.getElementById("stat-total-jobs").textContent = totalCount;
+    document.getElementById("tab-jobs-count").textContent = totalCount;
+
+    renderRadarFeed();
   } catch (err) {
-    grid.innerHTML = `<div class="error-state">Failed to load jobs: ${err.message}</div>`;
+    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--signal-red);">Failed to connect: ${err.message}</div>`;
   }
 }
 
-function filterAndRenderJobs() {
-  const searchVal = document.getElementById("job-search").value.toLowerCase().trim();
-  const domainVal = document.getElementById("filter-domain").value;
-  const seniorityVal = document.getElementById("filter-seniority").value;
-  const countEl = document.getElementById("jobs-count");
-  const grid = document.getElementById("jobs-grid");
+function renderRadarFeed() {
+  const searchVal = document.getElementById("radar-search")?.value.toLowerCase().trim() || "";
+  const domainVal = document.getElementById("filter-domain")?.value || "all";
+  const seniorityVal = document.getElementById("filter-seniority")?.value || "all";
+  const grid = document.getElementById("radar-grid");
 
-  const filtered = allJobs.filter((job) => {
-    const matchSearch =
+  const filtered = marketJobs.filter((job) => {
+    const matchesSearch =
       job.title.toLowerCase().includes(searchVal) ||
-      job.company.toLowerCase().includes(searchVal);
+      job.company.toLowerCase().includes(searchVal) ||
+      (job.triage?.tech_stack || []).some((t) => t.toLowerCase().includes(searchVal));
 
-    let matchDomain = true;
+    let matchesDomain = true;
     if (domainVal !== "all") {
-      matchDomain = job.triage?.domain === domainVal;
+      matchesDomain = job.triage?.domain === domainVal;
     }
 
-    let matchSeniority = true;
+    let matchesSeniority = true;
     if (seniorityVal !== "all") {
-      matchSeniority = job.triage?.seniority === seniorityVal;
+      matchesSeniority = job.triage?.seniority === seniorityVal;
     }
 
-    return matchSearch && matchDomain && matchSeniority;
+    return matchesSearch && matchesDomain && matchesSeniority;
   });
 
-  countEl.textContent = filtered.length;
   grid.innerHTML = "";
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column: 1/-1; text-align:center; padding:3rem;">No jobs match your filter criteria.</div>';
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">No positions match your search criteria.</div>';
     return;
   }
 
   filtered.forEach((job) => {
-    const card = document.createElement("div");
-    card.className = "job-card";
+    const card = document.createElement("article");
+    card.className = "radar-card";
 
-    let salaryBadge = "";
+    let salaryHtml = "";
     if (job.salary_raw) {
-      salaryBadge = `<span class="job-tag tag-salary">${job.salary_raw}</span>`;
+      salaryHtml = `<span class="meta-pill salary">${escapeHtml(job.salary_raw)}</span>`;
     }
 
-    let triageSnippet = "";
+    let triageHighlight = "";
     if (job.triage) {
-      triageSnippet = `
-        <div class="job-triage-preview">
-          <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
-            <span class="enum-badge badge-seniority" style="font-size:0.7rem;">${job.triage.seniority}</span>
-            <span class="enum-badge badge-domain" style="font-size:0.7rem;">${job.triage.domain}</span>
+      triageHighlight = `
+        <div class="triage-highlight-box">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.25rem;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--copper-primary); text-transform:uppercase;">${escapeHtml(job.triage.seniority)} &middot; ${escapeHtml(job.triage.domain)}</span>
+            <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted);">${Math.round(job.triage.confidence * 100)}% conf</span>
           </div>
-          <p style="font-size:0.8rem; color:#cbd5e1;">${job.triage.one_sentence_summary}</p>
+          <p>${escapeHtml(job.triage.one_sentence_summary)}</p>
         </div>
       `;
     }
 
     card.innerHTML = `
-      <div class="job-header">
-        <h4 class="job-title">${escapeHtml(job.title)}</h4>
-        <span class="job-company">${escapeHtml(job.company)}</span>
+      <div class="card-top">
+        <div>
+          <h3 class="role-title">${escapeHtml(job.title)}</h3>
+          <p class="company-title">${escapeHtml(job.company)} &middot; <span style="color:var(--text-muted); font-size:0.78rem;">${job.is_remote ? "Remote" : "On-site"}</span></p>
+        </div>
       </div>
-      <div class="job-badges">
-        <span class="job-tag">${job.is_remote ? "🌐 Remote" : "🏢 On-Site"}</span>
-        <span class="job-tag">${escapeHtml(job.job_type || "Full-Time")}</span>
-        ${salaryBadge}
+      <div class="card-pills">
+        <span class="meta-pill">${escapeHtml(job.job_type || "Full-Time")}</span>
+        ${salaryHtml}
       </div>
-      ${triageSnippet}
-      <div class="job-footer">
-        <span>Scraped: ${new Date(job.fetched_at).toLocaleDateString()}</span>
-        <a href="${job.canonical_url}" target="_blank" rel="noopener" class="job-link">View Listing &rarr;</a>
+      ${triageHighlight}
+      <div class="card-foot">
+        <span>Verified ${new Date(job.fetched_at).toLocaleDateString()}</span>
+        <a href="${job.canonical_url}" target="_blank" rel="noopener" class="source-anchor">Direct Listing &rarr;</a>
       </div>
     `;
+
     grid.appendChild(card);
   });
 }
@@ -341,59 +223,174 @@ function escapeHtml(str) {
 }
 
 // ==============================================================================
-// TAB 3: System Observability & Cost Calculator
+// TAB 2: Semantic Triage Studio Controller
 // ==============================================================================
-function initObservability() {
-  const slider = document.getElementById("volume-slider");
-  const volumeDisplay = document.getElementById("volume-display");
-  const inputTokensEl = document.getElementById("calc-input-tokens");
-  const outputTokensEl = document.getElementById("calc-output-tokens");
-  const dailyCostEl = document.getElementById("calc-daily-cost");
-  const monthlyCostEl = document.getElementById("calc-monthly-cost");
+function initTriageStudio() {
+  const form = document.getElementById("studio-form");
+  const titleInput = document.getElementById("studio-title");
+  const companyInput = document.getElementById("studio-company");
+  const descInput = document.getElementById("studio-desc");
+  const submitBtn = document.getElementById("studio-submit-btn");
+  const clearBtn = document.getElementById("studio-clear-btn");
+  const spinner = submitBtn.querySelector(".spinner");
+  const btnCaption = submitBtn.querySelector(".btn-caption");
 
-  slider.addEventListener("input", () => {
-    const volume = parseInt(slider.value, 10);
-    volumeDisplay.textContent = `${volume.toLocaleString()} requests / day`;
+  // Load first preset by default
+  applyPreset("senior-backend");
 
-    const inputTokens = volume * 420;
-    const outputTokens = volume * 95;
+  // Preset Chips
+  document.querySelectorAll(".preset-chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".preset-chip").forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      applyPreset(chip.getAttribute("data-preset"));
+    });
+  });
 
-    // Pricing: $0.15 per 1M input, $0.60 per 1M output
-    const dailyCost = (inputTokens / 1_000_000) * 0.15 + (outputTokens / 1_000_000) * 0.60;
-    const monthlyCost = dailyCost * 30;
+  function applyPreset(presetKey) {
+    const preset = PRESETS[presetKey];
+    if (preset) {
+      titleInput.value = preset.title;
+      companyInput.value = preset.company;
+      descInput.value = preset.description;
+    }
+  }
 
-    inputTokensEl.textContent = inputTokens.toLocaleString();
-    outputTokensEl.textContent = outputTokens.toLocaleString();
-    dailyCostEl.textContent = `$${dailyCost.toFixed(2)}`;
-    monthlyCostEl.textContent = `$${monthlyCost.toFixed(2)}`;
+  clearBtn.addEventListener("click", () => {
+    form.reset();
+    document.getElementById("dossier-content").classList.add("hidden");
+    document.getElementById("dossier-empty").classList.remove("hidden");
+    document.getElementById("dossier-latency").textContent = "-";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      title: titleInput.value.trim(),
+      company: companyInput.value.trim() || undefined,
+      description: descInput.value.trim()
+    };
+
+    submitBtn.disabled = true;
+    spinner.classList.remove("hidden");
+    btnCaption.textContent = "Synthesizing...";
+
+    const t0 = performance.now();
+
+    try {
+      const res = await fetch("/api/v1/jobs/triage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      const elapsed = Math.round(performance.now() - t0);
+
+      if (!res.ok) {
+        alert(`Error (${res.status}): ${data.error || "Triage failed"}\n${JSON.stringify(data.details || {})}`);
+        return;
+      }
+
+      renderDecisionDossier(data, elapsed, res.headers.get("X-LLM-Stub") === "true");
+    } catch (err) {
+      alert(`API Connection Error: ${err.message}`);
+    } finally {
+      submitBtn.disabled = false;
+      spinner.classList.add("hidden");
+      btnCaption.textContent = "Run Semantic Triage";
+    }
   });
 }
 
-async function loadObservabilityData() {
-  // Load LLM Health
+function renderDecisionDossier(data, elapsedMs, isStub) {
+  document.getElementById("dossier-empty").classList.add("hidden");
+  document.getElementById("dossier-content").classList.remove("hidden");
+
+  // Latency & policy
+  document.getElementById("dossier-latency").textContent = `${elapsedMs}ms (${isStub ? "Stub Mode" : "Live Model"})`;
+
+  // Specification Badges
+  document.getElementById("spec-seniority").textContent = data.seniority;
+  document.getElementById("spec-domain").textContent = data.domain.replace("_", " ");
+  document.getElementById("spec-workplace").textContent = data.workplace_type.replace("_", " ");
+  document.getElementById("spec-visa").textContent = data.visa_sponsorship.replace("_", " ");
+
+  // Confidence gauge
+  const pct = Math.round(data.confidence * 100);
+  document.getElementById("gauge-percent").textContent = `${pct}%`;
+  document.getElementById("gauge-bar").style.width = `${pct}%`;
+
+  // Tech stack chips
+  const tagsContainer = document.getElementById("dossier-tags");
+  tagsContainer.innerHTML = "";
+  if (data.tech_stack && data.tech_stack.length > 0) {
+    data.tech_stack.forEach((tech) => {
+      const chip = document.createElement("span");
+      chip.className = "tag-chip";
+      chip.textContent = tech;
+      tagsContainer.appendChild(chip);
+    });
+  } else {
+    tagsContainer.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">None explicitly stated</span>';
+  }
+
+  // Summary & Rationale
+  document.getElementById("dossier-summary").textContent = data.one_sentence_summary;
+  document.getElementById("dossier-reason-text").textContent = data.reason;
+
+  // Raw JSON
+  document.getElementById("dossier-json-raw").querySelector("code").textContent = JSON.stringify(data, null, 2);
+}
+
+// ==============================================================================
+// TAB 3: Telemetry & Token Economics Controller
+// ==============================================================================
+function initTelemetryAndCalc() {
+  const slider = document.getElementById("volume-range");
+  const label = document.getElementById("slider-val-label");
+  const inTokens = document.getElementById("calc-in-tokens");
+  const outTokens = document.getElementById("calc-out-tokens");
+  const dayCost = document.getElementById("calc-day-cost");
+  const monthCost = document.getElementById("calc-month-cost");
+
+  slider?.addEventListener("input", () => {
+    const val = parseInt(slider.value, 10);
+    label.textContent = `${val.toLocaleString()} requests / day`;
+
+    const dailyIn = val * 420;
+    const dailyOut = val * 95;
+
+    // Standard baseline: $0.15/1M in, $0.60/1M out
+    const dCost = (dailyIn / 1_000_000) * 0.15 + (dailyOut / 1_000_000) * 0.60;
+    const mCost = dCost * 30;
+
+    inTokens.textContent = `${(dailyIn / 1_000_000).toFixed(2)}M tokens`;
+    outTokens.textContent = `${Math.round(dailyOut / 1_000).toLocaleString()}K tokens`;
+    dayCost.textContent = `$${dCost.toFixed(2)}`;
+    monthCost.textContent = `$${mCost.toFixed(2)}`;
+  });
+}
+
+async function fetchTelemetryMetrics() {
+  // LLM Core
   try {
     const res = await fetch("/api/v1/jobs/health");
     const data = await res.json();
-    document.getElementById("metric-provider").textContent = data.llm?.provider_url || "-";
-    document.getElementById("metric-model").textContent = data.llm?.model || "-";
+    document.getElementById("tele-model").textContent = data.llm?.model || "-";
+    document.getElementById("tele-provider").textContent = data.llm?.provider_url || "-";
+    document.getElementById("tele-stub").textContent = data.llm?.stub_mode ? "ACTIVE (Zero-Cost)" : "DISABLED";
+    document.getElementById("tele-kill").textContent = data.llm?.kill_switch_enabled ? "READY" : "TRIGGERED";
+  } catch (e) {}
 
-    const stubBadge = document.getElementById("metric-stub");
-    stubBadge.textContent = data.llm?.stub_mode ? "ACTIVE" : "DISABLED";
-    stubBadge.className = data.llm?.stub_mode ? "badge badge-stub" : "badge badge-seniority";
-
-    const killBadge = document.getElementById("metric-kill");
-    killBadge.textContent = data.llm?.kill_switch_enabled ? "READY" : "TRIGGERED";
-    killBadge.className = data.llm?.kill_switch_enabled ? "badge badge-domain" : "badge badge-stub";
-  } catch (err) {}
-
-  // Load Scraper Run Report
+  // Scraper Report
   try {
     const res = await fetch("/api/v1/jobs/report");
     const report = await res.json();
-    document.getElementById("metric-target").textContent = report.target || "-";
-    document.getElementById("metric-valid-records").textContent = report.valid_records ?? 0;
-    document.getElementById("metric-cache-hits").textContent = `${report.cache_hits ?? 0} hits / ${report.pages_fetched ?? 0} pages`;
-    document.getElementById("metric-failed-pages").textContent = report.failed_pages ?? 0;
-    document.getElementById("metric-duration").textContent = `${report.duration_ms ?? 0} ms`;
-  } catch (err) {}
+    document.getElementById("tele-target").textContent = new URL(report.target).hostname;
+    document.getElementById("tele-records").textContent = report.valid_records ?? 0;
+    document.getElementById("tele-cache").textContent = `${report.cache_hits ?? 0} hits / ${report.pages_fetched ?? 0} pages`;
+    document.getElementById("tele-duration").textContent = `${report.duration_ms ?? 0} ms`;
+  } catch (e) {}
 }
