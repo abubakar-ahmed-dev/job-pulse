@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { config } from "../config.js";
 import { TriageRequestSchema } from "../schemas/triageSchema.js";
-import { triageJob, LLMTimeoutError, LLMValidationError, LLMUnavailableError } from "../llm/triageService.js";
+import { triageJob, testLlmConnection, LLMTimeoutError, LLMValidationError, LLMUnavailableError } from "../llm/triageService.js";
 
 export const jobsRouter = express.Router();
 
@@ -24,6 +24,23 @@ jobsRouter.get("/health", (req, res) => {
 });
 
 /**
+ * Diagnostic Endpoint: Test Live LLM Provider Connection
+ * POST /api/v1/jobs/test-llm
+ */
+jobsRouter.post("/test-llm", async (req, res) => {
+  const apiKey = req.headers["x-openrouter-key"] || req.body.apiKey;
+  const model = req.headers["x-llm-model"] || req.body.model;
+  const baseUrl = req.body.baseUrl;
+
+  const result = await testLlmConnection({ apiKey, model, baseUrl });
+  if (result.ok) {
+    return res.status(200).json(result);
+  } else {
+    return res.status(result.status || 400).json(result);
+  }
+});
+
+/**
  * Guarded LLM Triage Endpoint (W7 Stage 1, 3, 4)
  * POST /api/v1/jobs/triage
  */
@@ -40,8 +57,16 @@ jobsRouter.post("/triage", async (req, res) => {
     });
   }
 
+  const clientKey = req.headers["x-openrouter-key"] || req.body.apiKey;
+  const clientModel = req.headers["x-llm-model"] || req.body.model;
+  const forceStub = req.headers["x-force-stub"] === "true" ? true : undefined;
+
   try {
-    const { result, metrics } = await triageJob(validation.data);
+    const { result, metrics } = await triageJob(validation.data, {
+      apiKey: clientKey,
+      model: clientModel,
+      stub: forceStub
+    });
     res.setHeader("X-LLM-Duration-Ms", String(metrics?.duration_ms ?? 0));
     res.setHeader("X-LLM-Stub", metrics?.is_stub ? "true" : "false");
     return res.status(200).json(result);

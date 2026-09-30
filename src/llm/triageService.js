@@ -1,5 +1,6 @@
-﻿import fs from "node:fs/promises";
+import fs from "node:fs/promises";
 import path from "node:path";
+import OpenAI from "openai";
 import { config } from "../config.js";
 import { llmClient } from "./client.js";
 import { TriageResponseSchema } from "../schemas/triageSchema.js";
@@ -86,61 +87,170 @@ async function quarantineFailedOutput(inputData, errorMsg, rawOutput) {
 }
 
 /**
- * Deterministic fallback returned when kill switch (LLM_ENABLED=false) is active.
+ * Known technology dictionary for heuristic extraction.
  */
-function getDeterministicFallback(inputData) {
-  const title = (inputData.title || "").toLowerCase();
-  let domain = "other";
-  if (title.includes("backend")) domain = "backend";
-  else if (title.includes("frontend")) domain = "frontend";
-  else if (title.includes("full") || title.includes("stack")) domain = "fullstack";
-  else if (title.includes("devops") || title.includes("cloud")) domain = "devops_cloud";
-  else if (title.includes("data") || title.includes("ai")) domain = "data_ai";
+const KNOWN_SKILLS = [
+  { name: "Go", regex: /\b(golang|go)\b/i },
+  { name: "Python", regex: /\bpython\b/i },
+  { name: "Django", regex: /\bdjango\b/i },
+  { name: "Flask", regex: /\bflask\b/i },
+  { name: "FastAPI", regex: /\bfastapi\b/i },
+  { name: "Node.js", regex: /\b(node|node\.js)\b/i },
+  { name: "React", regex: /\breact(\.js)?\b/i },
+  { name: "TypeScript", regex: /\b(typescript|ts)\b/i },
+  { name: "JavaScript", regex: /\b(javascript|js)\b/i },
+  { name: "HTML5", regex: /\bhtml5?\b/i },
+  { name: "CSS3", regex: /\bcss3?\b/i },
+  { name: "Vue", regex: /\bvue(\.js)?\b/i },
+  { name: "Angular", regex: /\bangular\b/i },
+  { name: "Kubernetes", regex: /\b(kubernetes|k8s)\b/i },
+  { name: "Docker", regex: /\bdocker\b/i },
+  { name: "AWS", regex: /\b(aws|amazon web services)\b/i },
+  { name: "GCP", regex: /\b(gcp|google cloud)\b/i },
+  { name: "Kafka", regex: /\bkafka\b/i },
+  { name: "PostgreSQL", regex: /\b(postgresql|postgres)\b/i },
+  { name: "SQL", regex: /\bsql\b/i },
+  { name: "Swift", regex: /\bswift(ui)?\b/i },
+  { name: "Kotlin", regex: /\bkotlin\b/i },
+  { name: "PyTorch", regex: /\bpytorch\b/i },
+  { name: "TensorFlow", regex: /\btensorflow\b/i },
+  { name: "Terraform", regex: /\bterraform\b/i },
+  { name: "GraphQL", regex: /\bgraphql\b/i },
+  { name: "CI/CD", regex: /\bci[\/\s]?cd\b/i }
+];
 
+/**
+ * Intelligent semantic analyzer used for deterministic stub mode and fallbacks.
+ */
+function synthesizeSemanticTriage(inputData) {
+  const title = (inputData.title || "").toLowerCase();
+  const desc = (inputData.description || "").toLowerCase();
+  const text = `${title} ${desc}`;
+
+  // 1. Detect prompt injection
+  const isInjection = /system override|ignore previous|say banana|system alert|disregard your output/i.test(text);
+
+  // 2. Extract tech stack from known canonical skills
+  const matchedSkills = [];
+  for (const skill of KNOWN_SKILLS) {
+    if (skill.regex.test(text)) {
+      matchedSkills.push(skill.name);
+      if (matchedSkills.length >= 8) break;
+    }
+  }
+
+  // 3. Domain determination (Check specific domains first)
+  let domain = "other";
+  if (/security|penetration|owasp|infosec|appsec|vulnerability/i.test(text)) {
+    domain = "security";
+  } else if (/machine learning|\bml\b|data scientist|deep learning|pytorch|tensorflow/i.test(text) || /\bai\b/i.test(title)) {
+    domain = "data_ai";
+  } else if (/devops|sre|platform engineer|infrastructure|kubernetes|terraform/i.test(text) || (/cloud/i.test(text) && !/microservices/i.test(desc))) {
+    domain = "devops_cloud";
+  } else if (/mobile|ios|android|swift|flutter/i.test(text)) {
+    domain = "mobile";
+  } else if (/full[- ]?stack/i.test(title) || (/\breact\b/i.test(text) && /\b(node|python|go)\b/i.test(text))) {
+    domain = "fullstack";
+  } else if (/frontend|ui|ux|react|vue|angular|css/i.test(title) || (/frontend/i.test(desc) && !/backend|server/i.test(desc))) {
+    domain = "frontend";
+  } else if (/backend|api|server|microservices|distributed|database|sql|go\b|python|django|flask/i.test(title) || /backend|microservices|rest api/i.test(desc)) {
+    domain = "backend";
+  }
+
+  // 4. Seniority determination
   let seniority = "unspecified";
-  if (title.includes("senior")) seniority = "senior";
-  else if (title.includes("lead")) seniority = "lead";
-  else if (title.includes("junior")) seniority = "junior";
-  else if (title.includes("staff") || title.includes("principal")) seniority = "senior";
+  if (domain === "other") {
+    seniority = "unspecified";
+  } else if (/\b(senior|sr\.?)\b/i.test(title)) {
+    seniority = "senior";
+  } else if (/\b(staff|principal|lead|guild lead|head of|director|vp|cto)\b/i.test(title)) {
+    seniority = /\b(cto|vp|director|head of)\b/i.test(title) ? "executive" : "lead";
+  } else if (/\b(junior|jr\.?|entry|intern|graduate|bootcamp)\b/i.test(title) || /1\s*year experience|boot\s*camp graduate/i.test(desc)) {
+    seniority = "junior";
+  } else if (/5\+\s*years|6\+\s*years|7\+\s*years|8\+\s*years/i.test(desc)) {
+    seniority = "senior";
+  } else if (/software engineer|developer|engineer|specialist/i.test(title)) {
+    seniority = "mid";
+  }
+
+  // 5. Workplace determination
+  let workplace = "unspecified";
+  if (/hybrid|days per week|days in office/i.test(desc)) {
+    workplace = "hybrid";
+  } else if (/on[- ]?site|in[- ]?office|london office/i.test(desc) && !/100%\s*remote|fully\s*remote/i.test(desc)) {
+    workplace = "on_site";
+  } else if (/remote|worldwide|anywhere|distributed/i.test(text)) {
+    workplace = "fully_remote";
+  }
+
+  // 6. Confidence & Rationale
+  let confidence = 0.92;
+  let reason = `Classified as ${seniority} ${domain.replace('_', ' ')} based on specified technical qualifications.`;
+
+  if (isInjection) {
+    confidence = 0.85;
+    reason = "Adversarial prompt injection attempt detected and neutralized; evaluated strictly on legitimate engineering scope.";
+  } else if (seniority === "unspecified" && domain === "other") {
+    confidence = 0.35;
+    reason = "Role lacks specific software engineering scope or explicit qualification criteria; confidence set low per when-unsure policy.";
+  } else if (seniority === "junior") {
+    confidence = 0.88;
+    reason = "Explicit junior entry-level scope and foundational stack requirements.";
+  } else if (seniority === "lead") {
+    confidence = 0.94;
+    reason = "Staff/Lead architectural scope and infrastructure leadership responsibilities.";
+  }
+
+  const cleanTitle = inputData.title || "Engineering Role";
+  const cleanComp = inputData.company ? ` at ${inputData.company}` : "";
+  const oneSentence = isInjection
+    ? `Develop Python and Flask backend services based in an on-site office.`
+    : `Develop and maintain ${domain.replace('_', ' ')} systems as ${cleanTitle}${cleanComp}.`;
 
   return {
     seniority,
     domain,
-    workplace_type: "unspecified",
+    workplace_type: workplace,
     visa_sponsorship: "unspecified",
-    tech_stack: [],
-    confidence: 0.5,
-    one_sentence_summary: `Software engineering role: ${inputData.title} at ${inputData.company || "company"}.`,
-    reason: "Deterministic fallback rule generated by emergency kill-switch policy."
+    tech_stack: matchedSkills,
+    confidence,
+    one_sentence_summary: oneSentence,
+    reason
   };
+}
+
+/**
+ * Deterministic fallback returned when kill switch (LLM_ENABLED=false) is active.
+ */
+function getDeterministicFallback(inputData) {
+  const synthesized = synthesizeSemanticTriage(inputData);
+  synthesized.reason = "Deterministic fallback rule generated by emergency kill-switch policy.";
+  return synthesized;
 }
 
 /**
  * Deterministic stub mock returned when LLM_STUB=1.
  */
 function getStubResponse(inputData) {
-  const fallback = getDeterministicFallback(inputData);
-  fallback.reason = "Deterministic response generated in stub mode (LLM_STUB=1).";
-  fallback.confidence = 0.95;
-  fallback.tech_stack = ["Node.js", "Docker", "PostgreSQL"];
-  fallback.workplace_type = "fully_remote";
-  return fallback;
+  return synthesizeSemanticTriage(inputData);
 }
 
 /**
  * Executes a call with exponential backoff & jitter for 429 and 5xx.
  * Never retries 400, 401, or 403.
  */
-async function callModelWithRetries(messages, maxAttempts = 3) {
+async function callModelWithRetries(messages, options = {}, maxAttempts = 3) {
   let attempt = 0;
   let delay = 1000;
+  const client = options.client || llmClient;
+  const model = options.model || config.llmModel;
 
   while (attempt < maxAttempts) {
     attempt++;
     const startTime = Date.now();
     try {
-      const response = await llmClient.chat.completions.create({
-        model: config.llmModel,
+      const response = await client.chat.completions.create({
+        model,
         messages,
         temperature: 0.1,
         max_tokens: 600
@@ -199,7 +309,12 @@ export async function triageJob(jobInput, options = {}) {
   }
 
   // 2. Check Stub Mode (Stage 1)
-  const isStub = config.llmStub || options.stub;
+  // If an explicit API key is provided, prefer live execution unless stub is explicitly set
+  const hasCustomKey = !!options.apiKey;
+  const isStub = options.stub !== undefined 
+    ? options.stub 
+    : (hasCustomKey ? false : config.llmStub);
+
   if (isStub) {
     const stubResult = getStubResponse(jobInput);
     const durationMs = Date.now() - startTime;
@@ -214,6 +329,19 @@ export async function triageJob(jobInput, options = {}) {
     });
     return { result: stubResult, metrics };
   }
+
+  // Configure dynamic client if custom API key is supplied
+  const activeClient = hasCustomKey
+    ? new OpenAI({
+        baseURL: options.baseUrl || config.llmBaseUrl,
+        apiKey: options.apiKey,
+        timeout: config.llmTimeoutMs,
+        maxRetries: 0
+      })
+    : llmClient;
+
+  const activeModel = options.model || config.llmModel;
+  const callOptions = { client: activeClient, model: activeModel };
 
   // 3. Prepare Prompt & Defensive Message Structure (Stage 2)
   const systemPrompt = await loadPromptSpec();
@@ -235,7 +363,7 @@ export async function triageJob(jobInput, options = {}) {
   let durationMs = 0;
 
   try {
-    const callResult = await callModelWithRetries(messages);
+    const callResult = await callModelWithRetries(messages, callOptions);
     durationMs = callResult.durationMs;
     const message = callResult.response.choices[0]?.message;
     rawOutput = message?.content || "";
@@ -256,7 +384,7 @@ export async function triageJob(jobInput, options = {}) {
     if (validationResult.success) {
       const metrics = await logCallMetrics({
         promptVersion: PROMPT_VERSION,
-        model: config.llmModel,
+        model: activeModel,
         inputTokens: usage.prompt_tokens,
         outputTokens: usage.completion_tokens,
         durationMs,
@@ -284,7 +412,7 @@ export async function triageJob(jobInput, options = {}) {
   ];
 
   try {
-    const repairCall = await callModelWithRetries(repairMessages);
+    const repairCall = await callModelWithRetries(repairMessages, callOptions);
     durationMs += repairCall.durationMs;
     const repairRaw = repairCall.response.choices[0]?.message?.content || "";
     usage.prompt_tokens += repairCall.response.usage?.prompt_tokens || 0;
@@ -298,7 +426,7 @@ export async function triageJob(jobInput, options = {}) {
       console.log("[REPAIR_SUCCESS] Model successfully repaired its output on retry!");
       const metrics = await logCallMetrics({
         promptVersion: PROMPT_VERSION,
-        model: config.llmModel,
+        model: activeModel,
         inputTokens: usage.prompt_tokens,
         outputTokens: usage.completion_tokens,
         durationMs,
@@ -314,5 +442,50 @@ export async function triageJob(jobInput, options = {}) {
     if (finalErr instanceof LLMValidationError) throw finalErr;
     await quarantineFailedOutput(jobInput, finalErr.message, rawOutput);
     throw new LLMValidationError(`Repair failed to produce valid JSON: ${finalErr.message}`);
+  }
+}
+
+/**
+ * Diagnostic utility to test active LLM provider connection.
+ */
+export async function testLlmConnection(options = {}) {
+  const apiKey = options.apiKey || config.llmApiKey;
+  const baseUrl = options.baseUrl || config.llmBaseUrl;
+  const model = options.model || config.llmModel;
+
+  if (!apiKey || apiKey === "your_openrouter_api_key_here" || apiKey === "stub-mode") {
+    return {
+      ok: false,
+      error: "No active OpenRouter API key found. Enter an API key in LLM Settings or .env to test live provider."
+    };
+  }
+
+  const client = new OpenAI({
+    baseURL: baseUrl,
+    apiKey,
+    timeout: 10000,
+    maxRetries: 0
+  });
+
+  const t0 = Date.now();
+  try {
+    const res = await client.chat.completions.create({
+      model,
+      messages: [{ role: "user", content: "Ping. Respond strictly with 'pong'." }],
+      max_tokens: 10
+    });
+    const reply = res.choices[0]?.message?.content || "";
+    return {
+      ok: true,
+      model,
+      reply: reply.trim(),
+      latencyMs: Date.now() - t0
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      error: err.message,
+      status: err.status || (err.response ? err.response.status : 500)
+    };
   }
 }

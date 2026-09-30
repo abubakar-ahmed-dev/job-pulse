@@ -146,4 +146,11 @@ describe("W7 LLM Guarded API Test Suite", () => {
     assert.ok(res.body.target);
     assert.ok(typeof res.body.valid_records === "number");
   });
+
+  it("8. Diagnostic Endpoint: POST /api/v1/jobs/test-llm detects missing key gracefully", async () => {
+    const res = await request(app).post("/api/v1/jobs/test-llm", { apiKey: "" });
+    assert.equal(res.status, 400);
+    assert.equal(res.body.ok, false);
+    assert.ok(res.body.error.includes("API key"));
+  });
 });

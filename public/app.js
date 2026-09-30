@@ -1,4 +1,4 @@
-﻿// ==============================================================================
+// ==============================================================================
 // JobPulse Frontend Controller
 // Pure ES2024 Vanilla JS - Zero External Frameworks
 // ==============================================================================
@@ -35,6 +35,8 @@ let marketJobs = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   initTabs();
+  initGuideModal();
+  initSettingsModal();
   initRadarFeed();
   initTriageStudio();
   initTelemetryAndCalc();
@@ -67,6 +69,241 @@ function initTabs() {
   });
 }
 
+function switchToTab(tabName) {
+  const targetBtn = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+  targetBtn?.click();
+}
+
+// ==============================================================================
+// MODAL 1: System Documentation & Workflow Guide Controller
+// ==============================================================================
+function initGuideModal() {
+  const modal = document.getElementById("guide-modal");
+  const openBtn = document.getElementById("btn-open-guide");
+  const bannerOpenBtn = document.getElementById("banner-open-guide-btn");
+  const closeBtn = document.getElementById("close-guide-modal-btn");
+  const closeFootBtn = document.getElementById("close-guide-modal-foot-btn");
+  const banner = document.getElementById("radar-guide-banner");
+  const dismissBannerBtn = document.getElementById("dismiss-guide-banner");
+
+  // Check banner dismissal state
+  if (localStorage.getItem("jobpulse_guide_dismissed") === "1" && banner) {
+    banner.classList.add("hidden");
+  }
+
+  dismissBannerBtn?.addEventListener("click", () => {
+    banner?.classList.add("hidden");
+    localStorage.setItem("jobpulse_guide_dismissed", "1");
+  });
+
+  function openGuide() {
+    modal?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeGuide() {
+    modal?.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openGuide);
+  bannerOpenBtn?.addEventListener("click", openGuide);
+  closeBtn?.addEventListener("click", closeGuide);
+  closeFootBtn?.addEventListener("click", closeGuide);
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeGuide();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+      closeGuide();
+    }
+  });
+
+  // Modal Sub-tabs switching
+  const modalTabs = modal?.querySelectorAll(".modal-tab");
+  modalTabs?.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      modalTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const guideTabId = `guide-tab-${tab.getAttribute("data-guide-tab")}`;
+      modal.querySelectorAll(".guide-tab-panel").forEach((panel) => {
+        panel.classList.remove("active");
+      });
+      document.getElementById(guideTabId)?.classList.add("active");
+    });
+  });
+}
+
+// ==============================================================================
+// MODAL 2: LLM Engine & API Settings Controller
+// ==============================================================================
+function initSettingsModal() {
+  const modal = document.getElementById("settings-modal");
+  const openBtn = document.getElementById("btn-open-settings");
+  const telemetryPill = document.getElementById("telemetry-pill");
+  const closeBtn = document.getElementById("close-settings-modal-btn");
+  const saveBtn = document.getElementById("save-settings-btn");
+  const resetBtn = document.getElementById("reset-settings-btn");
+  const testBtn = document.getElementById("btn-test-connection");
+  const testResultBox = document.getElementById("connection-test-result");
+  const toggleKeyBtn = document.getElementById("toggle-key-visibility");
+
+  const radioBuiltin = document.getElementById("engine-mode-builtin");
+  const radioLive = document.getElementById("engine-mode-live");
+  const liveSection = document.getElementById("live-settings-section");
+  const apiKeyInput = document.getElementById("cfg-api-key");
+  const modelSelect = document.getElementById("cfg-model");
+  const baseUrlInput = document.getElementById("cfg-base-url");
+
+  function openSettings() {
+    // Populate existing preferences
+    const savedMode = localStorage.getItem("jobpulse_engine_mode") || "builtin";
+    const savedKey = localStorage.getItem("jobpulse_api_key") || "";
+    const savedModel = localStorage.getItem("jobpulse_model") || "openrouter/free";
+    const savedBaseUrl = localStorage.getItem("jobpulse_base_url") || "https://openrouter.ai/api/v1";
+
+    if (savedMode === "live") {
+      radioLive.checked = true;
+      liveSection?.classList.remove("hidden");
+    } else {
+      radioBuiltin.checked = true;
+      liveSection?.classList.add("hidden");
+    }
+
+    if (apiKeyInput) apiKeyInput.value = savedKey;
+    if (modelSelect) modelSelect.value = savedModel;
+    if (baseUrlInput) baseUrlInput.value = savedBaseUrl;
+    if (testResultBox) testResultBox.classList.add("hidden");
+
+    modal?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSettings() {
+    modal?.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openSettings);
+  telemetryPill?.addEventListener("click", openSettings);
+  closeBtn?.addEventListener("click", closeSettings);
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeSettings();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+      closeSettings();
+    }
+  });
+
+  // Radio toggling
+  radioBuiltin?.addEventListener("change", () => {
+    if (radioBuiltin.checked) liveSection?.classList.add("hidden");
+  });
+  radioLive?.addEventListener("change", () => {
+    if (radioLive.checked) liveSection?.classList.remove("hidden");
+  });
+
+  // Key peek
+  toggleKeyBtn?.addEventListener("click", () => {
+    if (apiKeyInput.type === "password") {
+      apiKeyInput.type = "text";
+      toggleKeyBtn.textContent = "🔒";
+    } else {
+      apiKeyInput.type = "password";
+      toggleKeyBtn.textContent = "👁️";
+    }
+  });
+
+  // Test connection button
+  testBtn?.addEventListener("click", async () => {
+    testBtn.disabled = true;
+    const spinner = testBtn.querySelector(".spinner");
+    spinner?.classList.remove("hidden");
+    testResultBox?.classList.add("hidden");
+
+    const payload = {
+      apiKey: apiKeyInput.value.trim(),
+      model: modelSelect.value,
+      baseUrl: baseUrlInput.value.trim()
+    };
+
+    try {
+      const res = await fetch("/api/v1/jobs/test-llm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      testResultBox.classList.remove("hidden");
+      if (res.ok && data.ok) {
+        testResultBox.className = "test-result-box success";
+        testResultBox.innerHTML = `<strong>Connected Successfully!</strong><br>Model responded in <code>${data.latencyMs}ms</code> with: "<em>${escapeHtml(data.reply)}</em>"`;
+      } else {
+        testResultBox.className = "test-result-box error";
+        testResultBox.innerHTML = `<strong>Connection Failed:</strong><br>${escapeHtml(data.error || "Provider error")}`;
+      }
+    } catch (err) {
+      testResultBox.classList.remove("hidden");
+      testResultBox.className = "test-result-box error";
+      testResultBox.innerHTML = `<strong>Network Error:</strong> ${escapeHtml(err.message)}`;
+    } finally {
+      testBtn.disabled = false;
+      spinner?.classList.add("hidden");
+    }
+  });
+
+  // Save settings
+  saveBtn?.addEventListener("click", () => {
+    const mode = radioLive.checked ? "live" : "builtin";
+    localStorage.setItem("jobpulse_engine_mode", mode);
+    localStorage.setItem("jobpulse_api_key", apiKeyInput.value.trim());
+    localStorage.setItem("jobpulse_model", modelSelect.value);
+    localStorage.setItem("jobpulse_base_url", baseUrlInput.value.trim());
+
+    updateEngineHeaderStatus();
+    closeSettings();
+  });
+
+  // Reset settings
+  resetBtn?.addEventListener("click", () => {
+    localStorage.removeItem("jobpulse_engine_mode");
+    localStorage.removeItem("jobpulse_api_key");
+    localStorage.removeItem("jobpulse_model");
+    localStorage.removeItem("jobpulse_base_url");
+
+    radioBuiltin.checked = true;
+    liveSection?.classList.add("hidden");
+    if (apiKeyInput) apiKeyInput.value = "";
+    if (modelSelect) modelSelect.value = "openrouter/free";
+    if (baseUrlInput) baseUrlInput.value = "https://openrouter.ai/api/v1";
+    if (testResultBox) testResultBox.classList.add("hidden");
+
+    updateEngineHeaderStatus();
+  });
+}
+
+function updateEngineHeaderStatus() {
+  const mode = localStorage.getItem("jobpulse_engine_mode") || "builtin";
+  const model = localStorage.getItem("jobpulse_model") || "openrouter/free";
+  const label = document.getElementById("telemetry-label");
+  const dot = document.querySelector(".telemetry-dot");
+
+  if (mode === "live") {
+    label.textContent = `Live: ${model.split("/")[1] || model}`;
+    dot.style.backgroundColor = "var(--copper-primary)";
+  } else {
+    label.textContent = "Core: Built-in Simulator";
+    dot.style.backgroundColor = "var(--signal-green)";
+  }
+}
+
 // ==============================================================================
 // Health Status Check
 // ==============================================================================
@@ -78,8 +315,15 @@ async function checkSystemHealth() {
     const res = await fetch("/api/v1/jobs/health");
     if (!res.ok) throw new Error("Offline");
     const data = await res.json();
-    label.textContent = data.llm?.stub_mode ? "Core: Stub Mode" : `Core: ${data.llm?.model}`;
-    dot.style.backgroundColor = "var(--signal-green)";
+    
+    // Check if user set local override
+    const mode = localStorage.getItem("jobpulse_engine_mode") || "builtin";
+    if (mode === "live") {
+      updateEngineHeaderStatus();
+    } else {
+      label.textContent = data.llm?.stub_mode ? "Core: Built-in Simulator" : `Core: ${data.llm?.model}`;
+      dot.style.backgroundColor = "var(--signal-green)";
+    }
   } catch (err) {
     label.textContent = "Core Offline";
     dot.style.backgroundColor = "var(--signal-red)";
@@ -208,13 +452,61 @@ function renderRadarFeed() {
       </div>
       ${triageHighlight}
       <div class="card-foot">
-        <span>Verified ${new Date(job.fetched_at).toLocaleDateString()}</span>
-        <a href="${job.canonical_url}" target="_blank" rel="noopener" class="source-anchor">Direct Listing &rarr;</a>
+        <span class="card-date">Verified ${new Date(job.fetched_at).toLocaleDateString()}</span>
+        <div class="card-actions-row">
+          <button class="btn-card-analyze" data-job-id="${escapeHtml(job.id)}" title="Load this posting directly into Semantic Studio">
+            <span>⚡ Analyze in Studio</span>
+          </button>
+          <a href="${job.canonical_url}" target="_blank" rel="noopener" class="source-anchor">Direct Listing &rarr;</a>
+        </div>
       </div>
     `;
 
+    // Hook analyze button
+    const analyzeBtn = card.querySelector(".btn-card-analyze");
+    analyzeBtn?.addEventListener("click", () => {
+      analyzeJobInStudio(job.id);
+    });
+
     grid.appendChild(card);
   });
+}
+
+/**
+ * 1-Click Studio Analysis Bridge
+ * Seamlessly loads a harvested role into Semantic Triage Studio and executes AI triage.
+ */
+function analyzeJobInStudio(jobId) {
+  const job = marketJobs.find((j) => j.id === jobId);
+  if (!job) return;
+
+  // 1. Switch to Semantic Triage Studio tab
+  switchToTab("studio");
+
+  // 2. Populate inputs
+  const titleInput = document.getElementById("studio-title");
+  const companyInput = document.getElementById("studio-company");
+  const descInput = document.getElementById("studio-desc");
+
+  titleInput.value = job.title;
+  companyInput.value = job.company || "";
+
+  // If scraped description is short or missing, provide clean structured context
+  if (job.description && job.description.length >= 20) {
+    descInput.value = job.description;
+  } else {
+    descInput.value = `Position: ${job.title} at ${job.company || "Leading Tech Firm"}.\nLocation: ${job.location || "Worldwide Remote"}. Employment Type: ${job.job_type || "Full-Time"}.\nCore Scope: Deliver production distributed engineering services with modern programming languages, automated testing, and cloud infrastructure pipelines.`;
+  }
+
+  // 3. Clear active preset chips
+  document.querySelectorAll(".preset-chip").forEach((c) => c.classList.remove("active"));
+
+  // 4. Trigger triage submission
+  const form = document.getElementById("studio-form");
+  form.requestSubmit();
+
+  // 5. Smoothly scroll to top of studio
+  document.getElementById("tab-studio")?.scrollIntoView({ behavior: "smooth" });
 }
 
 function escapeHtml(str) {
@@ -278,10 +570,23 @@ function initTriageStudio() {
 
     const t0 = performance.now();
 
+    // Check user preferences for engine mode & custom credentials
+    const engineMode = localStorage.getItem("jobpulse_engine_mode") || "builtin";
+    const apiKey = localStorage.getItem("jobpulse_api_key") || "";
+    const model = localStorage.getItem("jobpulse_model") || "";
+
+    const headers = { "Content-Type": "application/json" };
+    if (engineMode === "live" && apiKey) {
+      headers["X-OpenRouter-Key"] = apiKey;
+      if (model) headers["X-LLM-Model"] = model;
+    } else if (engineMode === "builtin") {
+      headers["X-Force-Stub"] = "true";
+    }
+
     try {
       const res = await fetch("/api/v1/jobs/triage", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify(payload)
       });
 
@@ -289,11 +594,12 @@ function initTriageStudio() {
       const elapsed = Math.round(performance.now() - t0);
 
       if (!res.ok) {
-        alert(`Error (${res.status}): ${data.error || "Triage failed"}\n${JSON.stringify(data.details || {})}`);
+        alert(`Triage Error (${res.status}): ${data.error || "Inference failed"}\n${data.message || ""}`);
         return;
       }
 
-      renderDecisionDossier(data, elapsed, res.headers.get("X-LLM-Stub") === "true");
+      const isStubResponse = res.headers.get("X-LLM-Stub") === "true";
+      renderDecisionDossier(data, elapsed, isStubResponse);
     } catch (err) {
       alert(`API Connection Error: ${err.message}`);
     } finally {
@@ -309,7 +615,7 @@ function renderDecisionDossier(data, elapsedMs, isStub) {
   document.getElementById("dossier-content").classList.remove("hidden");
 
   // Latency & policy
-  document.getElementById("dossier-latency").textContent = `${elapsedMs}ms (${isStub ? "Stub Mode" : "Live Model"})`;
+  document.getElementById("dossier-latency").textContent = `${elapsedMs}ms (${isStub ? "Built-in Simulator" : "Live Provider"})`;
 
   // Specification Badges
   document.getElementById("spec-seniority").textContent = data.seniority;
@@ -378,9 +684,12 @@ async function fetchTelemetryMetrics() {
   try {
     const res = await fetch("/api/v1/jobs/health");
     const data = await res.json();
-    document.getElementById("tele-model").textContent = data.llm?.model || "-";
+    const mode = localStorage.getItem("jobpulse_engine_mode") || "builtin";
+    const customModel = localStorage.getItem("jobpulse_model");
+
+    document.getElementById("tele-model").textContent = mode === "live" && customModel ? customModel : (data.llm?.model || "-");
     document.getElementById("tele-provider").textContent = data.llm?.provider_url || "-";
-    document.getElementById("tele-stub").textContent = data.llm?.stub_mode ? "ACTIVE (Zero-Cost)" : "DISABLED";
+    document.getElementById("tele-stub").textContent = mode === "live" ? "LIVE OPENROUTER" : "BUILT-IN SIMULATOR (Zero-Cost)";
     document.getElementById("tele-kill").textContent = data.llm?.kill_switch_enabled ? "READY" : "TRIGGERED";
   } catch (e) {}
 
