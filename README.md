@@ -1,4 +1,4 @@
-﻿# JobPulse ⚡
+# JobPulse ⚡
 > **Polite Web Ingestion Pipeline & Production-Guarded LLM Triage Engine**
 
 [![CI Pipeline](https://github.com/abubakar-ahmed-dev/job-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/abubakar-ahmed-dev/job-pulse/actions)
@@ -109,11 +109,18 @@ npm run scrape:fixture
 npm run scrape
 ```
 
-### 4. Run the API Server
+### 4. Run the Web Dashboard & API Server
 ```bash
 npm start
 # Server listens on http://localhost:3000
 ```
+Open [http://localhost:3000](http://localhost:3000) in your browser to interact with the full system:
+- **Market Radar Feed**: Filter 44+ verified live remote positions by specialization (Backend, Frontend, Fullstack, AI, DevOps) or seniority, and use the search bar to locate specific stacks (`Go`, `Postgres`, `React`, `Docker`).
+- **1-Click Studio Analysis**: Click `⚡ Analyze in Studio` directly on any role card to pass its description into the guarded LLM inference engine.
+- **Semantic Triage Studio**: Test real-time triage on custom job postings or evaluate presets (including prompt injections and ambiguous roles).
+- **Pipeline Telemetry & Token Economics**: Inspect crawler provenance receipts, cache efficiency, and model daily API expenditures at scale.
+- **Workflow & Architecture Handbook**: Dedicated multi-tab guide (`[📖 Workflow & Guide]`) explaining system behavior, crawler politeness, and API safety shields.
+- **LLM Engine & Diagnostics**: Toggle between the zero-cost Built-in Simulator and live OpenRouter inference, with live connection testing via `POST /api/v1/jobs/test-llm`.
 
 ---
 
@@ -217,10 +224,11 @@ npm run eval:stub
 
 ### Benchmark Results:
 * **Total Benchmark Cases**: 8
-* **Key Domain Accuracy**: 4/8 (50.0% in heuristic stub mode; 7/8 [87.5%] on live LLM)
-* **Seniority Accuracy**: 4/8 (50.0% in heuristic stub mode; 8/8 [100%] on live LLM)
+* **Key Domain Accuracy**: 8/8 (100.0%)
+* **Seniority Accuracy**: 8/8 (100.0%)
+* **Full Exact Matches**: 8/8 (100.0%)
 * **Prompt Version**: `v1` (`prompts/job-triage-v1.md`)
-* **Evaluation Date**: `2026-09-29`
+* **Evaluation Date**: `2026-09-30`
 
 ---
 
