@@ -153,4 +153,34 @@ describe("W7 LLM Guarded API Test Suite", () => {
     assert.equal(res.body.ok, false);
     assert.ok(res.body.error.includes("API key"));
   });
+
+  it("9. Explorer Endpoint: GET /api/v1/jobs/list includes sources_summary breakdown", async () => {
+    const res = await request(app).get("/api/v1/jobs/list");
+    assert.equal(res.status, 200);
+    assert.ok(res.body.sources_summary);
+    assert.ok(typeof res.body.sources_summary === "object");
+  });
+
+  it("10. Export Endpoint: GET /api/v1/jobs/export?format=csv returns CSV formatted data", async () => {
+    const res = await request(app).get("/api/v1/jobs/export?format=csv");
+    assert.equal(res.status, 200);
+    assert.ok(typeof res.body === "string");
+    assert.ok(res.body.includes("ID,Title,Company,Source"));
+  });
+
+  it("11. Export Endpoint: GET /api/v1/jobs/export?format=md returns Markdown formatted dossier report", async () => {
+    const res = await request(app).get("/api/v1/jobs/export?format=md");
+    assert.equal(res.status, 200);
+    assert.ok(typeof res.body === "string");
+    assert.ok(res.body.includes("# ⚡ JobPulse Market Intelligence Export"));
+    assert.ok(res.body.includes("| Role Title | Company |"));
+  });
+
+  it("12. Export Endpoint: GET /api/v1/jobs/export?format=json returns structured JSON envelope", async () => {
+    const res = await request(app).get("/api/v1/jobs/export?format=json");
+    assert.equal(res.status, 200);
+    assert.ok(res.body.exported_at);
+    assert.ok(typeof res.body.total_records === "number");
+    assert.ok(Array.isArray(res.body.jobs));
+  });
 });

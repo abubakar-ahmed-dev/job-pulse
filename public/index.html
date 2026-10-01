@@ -127,16 +127,16 @@
           <span id="stat-total-jobs" class="stat-number accent">44</span>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Crawl Target</span>
-          <span class="stat-number">WeWorkRemotely</span>
+          <span class="stat-label">Federated Sources</span>
+          <span class="stat-number" id="stat-sources-label">2 Boards (WWR + Arbeitnow)</span>
         </div>
         <div class="stat-card">
           <span class="stat-label">Provenance Status</span>
-          <span class="stat-number">100% Verified</span>
+          <span class="stat-number">100% Cryptographic</span>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Avg. Ingestion Latency</span>
-          <span class="stat-number">42ms / rec</span>
+          <span class="stat-label">Target Segments</span>
+          <span class="stat-number">Remote &amp; Junior Tech</span>
         </div>
       </div>
 
@@ -151,6 +151,12 @@
         </div>
 
         <div class="filter-group">
+          <select id="filter-source" title="Filter by Crawl Source Board">
+            <option value="all">All Sources</option>
+            <option value="WeWorkRemotely">WeWorkRemotely</option>
+            <option value="Arbeitnow">Arbeitnow (Junior)</option>
+          </select>
+
           <select id="filter-domain">
             <option value="all">All Domains</option>
             <option value="backend">Backend</option>
@@ -173,6 +179,30 @@
         </div>
 
         <div class="toolbar-actions">
+          <!-- 1-Click Multi-Format Export Dropdown -->
+          <div class="export-dropdown-wrapper">
+            <button id="export-dropdown-btn" class="btn-outline export-btn" title="Export filtered positions and triage dossiers">
+              <span>📥 Export</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+            </button>
+            <div id="export-menu" class="export-menu hidden">
+              <button class="export-menu-item" data-export-format="csv">
+                <span class="export-fmt-badge">CSV</span>
+                <span class="export-fmt-desc">Spreadsheet (.csv)</span>
+              </button>
+              <button class="export-menu-item" data-export-format="json">
+                <span class="export-fmt-badge">JSON</span>
+                <span class="export-fmt-desc">Structured Data (.json)</span>
+              </button>
+              <button class="export-menu-item" data-export-format="md">
+                <span class="export-fmt-badge">MD</span>
+                <span class="export-fmt-desc">Formatted Report (.md)</span>
+              </button>
+            </div>
+          </div>
+
           <button id="batch-enrich-btn" class="btn-copper">
             <span class="spinner hidden"></span>
             <span>Batch Enrich with AI</span>

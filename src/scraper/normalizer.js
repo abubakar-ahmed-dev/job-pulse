@@ -1,4 +1,4 @@
-﻿import crypto from "node:crypto";
+import crypto from "node:crypto";
 import { JobNormalizedSchema } from "../schemas/jobSchema.js";
 
 /**
@@ -70,6 +70,7 @@ export function normalizeJob(rawRecord) {
     canonical_url: canonicalUrl,
     title: rawRecord.title.trim(),
     company: rawRecord.company.trim(),
+    source_site: rawRecord.source_site || "WeWorkRemotely",
     location,
     is_remote: isRemote,
     job_type: rawRecord.job_type_raw || "Full-Time",

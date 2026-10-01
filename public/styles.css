@@ -576,6 +576,75 @@ p, li {
   display: flex;
   gap: 0.5rem;
   margin-left: auto;
+  align-items: center;
+}
+
+/* Export Dropdown Menu */
+.export-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.export-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 210px;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.export-menu.hidden {
+  display: none;
+}
+
+.export-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.export-menu-item:hover {
+  background-color: var(--surface-3);
+  border-color: var(--border-subtle);
+}
+
+.export-fmt-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--surface-1);
+  color: var(--copper-primary);
+  border: 1px solid var(--copper-border);
+}
+
+.export-fmt-desc {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .radar-grid {
@@ -642,6 +711,26 @@ p, li {
   border-color: rgba(62, 168, 119, 0.25);
   font-family: var(--font-mono);
   font-weight: 600;
+}
+
+.meta-pill.source-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.meta-pill.source-wwr {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.meta-pill.source-arbeitnow {
+  background-color: rgba(224, 109, 68, 0.12);
+  color: var(--copper-primary);
+  border-color: var(--copper-border);
 }
 
 .triage-highlight-box {

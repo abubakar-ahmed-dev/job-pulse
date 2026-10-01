@@ -1,4 +1,4 @@
-﻿import { describe, it } from "node:test";
+import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -62,5 +62,30 @@ describe("W5 Scraper Pipeline Test Suite", () => {
 
     assert.ok(raw.title);
     assert.equal(raw.description_raw, null);
+  });
+
+  it("6. Arbeitnow Catalogue: correctly extracts junior listings from offline fixture", async () => {
+    const fixturePath = path.join(config.fixturesDir, "arbeitnow-catalogue.html");
+    const html = await fs.readFile(fixturePath, "utf-8");
+    const { jobUrls } = parseCataloguePage(html, "https://www.arbeitnow.com/jobs/junior");
+
+    assert.ok(jobUrls.length > 0, "Should discover job URLs from Arbeitnow catalogue");
+    assert.ok(jobUrls.every((url) => url.startsWith("https://www.arbeitnow.com/")), "All URLs should be absolute");
+  });
+
+  it("7. Arbeitnow Detail: extracts JSON-LD JobPosting schema and validates with Zod", async () => {
+    const fixturePath = path.join(config.fixturesDir, "arbeitnow-detail.html");
+    const html = await fs.readFile(fixturePath, "utf-8");
+    const raw = parseJobDetailPage(html, "https://www.arbeitnow.com/jobs/companies/haiilo-1/junior-fullstack-engineer-hamburg-410395", "https://www.arbeitnow.com/jobs/junior");
+
+    assert.equal(raw.title, "Junior Fullstack Engineer");
+    assert.equal(raw.company, "Haiilo 1");
+    assert.equal(raw.source_site, "Arbeitnow");
+    assert.ok(raw.description_raw && raw.description_raw.length > 50);
+
+    const normalized = normalizeJob(raw);
+    assert.equal(normalized.source_site, "Arbeitnow");
+    assert.equal(normalized.title, "Junior Fullstack Engineer");
+    assert.equal(typeof normalized.id, "string");
   });
 });

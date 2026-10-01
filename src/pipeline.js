@@ -1,4 +1,4 @@
-﻿import fs from "node:fs/promises";
+import fs from "node:fs/promises";
 import path from "node:path";
 import { config } from "./config.js";
 import { runScraperPipeline } from "./scraper/cli.js";
@@ -23,6 +23,8 @@ export async function runFullPipeline(options = {}) {
   const jobs = scrapeResult.jobs.slice(0, options.limit || 5);
   console.log(`\n[STEP 2/2] Triaging ${jobs.length} jobs through Guarded LLM Intelligence Layer (W7)...`);
 
+  const isStubMode = options.stub !== undefined ? options.stub : (config.llmStub || config.llmApiKey === "stub-mode" || process.argv.includes("--stub") || useFixtures);
+
   const enrichedJobs = [];
   for (let i = 0; i < jobs.length; i++) {
     const job = jobs[i];
@@ -32,7 +34,7 @@ export async function runFullPipeline(options = {}) {
       title: job.title,
       company: job.company,
       description: job.description || "Software engineering role."
-    }, { stub: config.llmStub });
+    }, { stub: isStubMode });
 
     enrichedJobs.push({
       ...job,

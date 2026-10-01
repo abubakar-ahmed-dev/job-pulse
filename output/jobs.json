@@ -4,6 +4,7 @@
     "canonical_url": "https://weworkremotely.com/remote-jobs/acme-senior-backend-engineer",
     "title": "Senior Backend Engineer",
     "company": "Acme Corp",
+    "source_site": "WeWorkRemotely",
     "location": "San Francisco, CA (Remote)",
     "is_remote": true,
     "job_type": "Full-Time",
@@ -12,14 +13,15 @@
     "salary_raw": "$140,000 - $180,000 USD",
     "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
-    "fetched_at": "2026-09-29T19:03:35.740Z",
-    "normalized_at": "2026-09-29T19:03:35.741Z"
+    "fetched_at": "2026-10-01T19:42:34.840Z",
+    "normalized_at": "2026-10-01T19:42:34.842Z"
   },
   {
     "id": "425814a881ed356a",
     "canonical_url": "https://weworkremotely.com/remote-jobs/globex-lead-frontend-developer",
     "title": "Stealth AI Researcher",
     "company": "Stealth Lab",
+    "source_site": "WeWorkRemotely",
     "location": "Remote Worldwide",
     "is_remote": true,
     "job_type": "Contract",
@@ -28,14 +30,15 @@
     "salary_raw": null,
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
-    "fetched_at": "2026-09-29T19:03:35.751Z",
-    "normalized_at": "2026-09-29T19:03:35.751Z"
+    "fetched_at": "2026-10-01T19:42:34.853Z",
+    "normalized_at": "2026-10-01T19:42:34.854Z"
   },
   {
     "id": "0ac6086297cb5abd",
     "canonical_url": "https://weworkremotely.com/remote-jobs/initech-junior-qa-engineer",
     "title": "Senior Backend Engineer",
     "company": "Acme Corp",
+    "source_site": "WeWorkRemotely",
     "location": "San Francisco, CA (Remote)",
     "is_remote": true,
     "job_type": "Full-Time",
@@ -44,8 +47,8 @@
     "salary_raw": "$140,000 - $180,000 USD",
     "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
-    "fetched_at": "2026-09-29T19:03:35.757Z",
-    "normalized_at": "2026-09-29T19:03:35.757Z"
+    "fetched_at": "2026-10-01T19:42:34.859Z",
+    "normalized_at": "2026-10-01T19:42:34.859Z"
   },
   {
     "id": "7263e80783003f6e",
@@ -61,7 +64,8 @@
     "description": "About the Role Acme Corp is seeking an experienced Senior Backend Engineer to architect resilient distributed systems using Node.js, Go, PostgreSQL, and Kafka. You will lead high-throughput microservices, optimize database performance, and mentor team members. Requirements 5+ years experience building cloud services in AWS, strong experience with Docker and Kubernetes, and proficiency with TypeScript/Node.js or Go.",
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:03:12.424Z",
-    "normalized_at": "2026-09-29T19:03:12.424Z"
+    "normalized_at": "2026-09-29T19:03:12.424Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "10fcf7092b01bbc1",
@@ -77,7 +81,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:30:37.012Z",
-    "normalized_at": "2026-09-29T19:30:37.016Z"
+    "normalized_at": "2026-09-29T19:30:37.016Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "e59e5bbf3575b8b7",
@@ -93,7 +98,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:30:37.105Z",
-    "normalized_at": "2026-09-29T19:30:37.106Z"
+    "normalized_at": "2026-09-29T19:30:37.106Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "a19dcb2000299c88",
@@ -109,7 +115,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:30:37.159Z",
-    "normalized_at": "2026-09-29T19:30:37.159Z"
+    "normalized_at": "2026-09-29T19:30:37.159Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "dc8f75f5473c70fb",
@@ -125,7 +132,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:30:37.197Z",
-    "normalized_at": "2026-09-29T19:30:37.197Z"
+    "normalized_at": "2026-09-29T19:30:37.197Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "42935dd3b58d0f0a",
@@ -141,7 +149,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:30:37.234Z",
-    "normalized_at": "2026-09-29T19:30:37.234Z"
+    "normalized_at": "2026-09-29T19:30:37.234Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "0803c353b86c2a7a",
@@ -157,7 +166,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.651Z",
-    "normalized_at": "2026-09-29T19:22:49.651Z"
+    "normalized_at": "2026-09-29T19:22:49.651Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "47c37adf3bf0ab32",
@@ -173,7 +183,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.694Z",
-    "normalized_at": "2026-09-29T19:22:49.694Z"
+    "normalized_at": "2026-09-29T19:22:49.694Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "fa3328aa268575f4",
@@ -189,7 +200,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.717Z",
-    "normalized_at": "2026-09-29T19:22:49.718Z"
+    "normalized_at": "2026-09-29T19:22:49.718Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "91d4b0888e5be851",
@@ -205,7 +217,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.735Z",
-    "normalized_at": "2026-09-29T19:22:49.735Z"
+    "normalized_at": "2026-09-29T19:22:49.735Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "362b595f5d8e839f",
@@ -221,7 +234,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.774Z",
-    "normalized_at": "2026-09-29T19:22:49.774Z"
+    "normalized_at": "2026-09-29T19:22:49.774Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "de579ee8d230a95e",
@@ -237,7 +251,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.844Z",
-    "normalized_at": "2026-09-29T19:22:49.844Z"
+    "normalized_at": "2026-09-29T19:22:49.844Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "d99b0502e94b3d51",
@@ -253,7 +268,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.873Z",
-    "normalized_at": "2026-09-29T19:22:49.873Z"
+    "normalized_at": "2026-09-29T19:22:49.873Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "c21e2e39496ecb23",
@@ -269,7 +285,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.911Z",
-    "normalized_at": "2026-09-29T19:22:49.911Z"
+    "normalized_at": "2026-09-29T19:22:49.911Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "21d04b4352ef95b7",
@@ -285,7 +302,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.948Z",
-    "normalized_at": "2026-09-29T19:22:49.948Z"
+    "normalized_at": "2026-09-29T19:22:49.948Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "ede772a45e8f2ccd",
@@ -301,7 +319,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:49.967Z",
-    "normalized_at": "2026-09-29T19:22:49.967Z"
+    "normalized_at": "2026-09-29T19:22:49.967Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "6352c85723625c61",
@@ -317,7 +336,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.021Z",
-    "normalized_at": "2026-09-29T19:22:50.021Z"
+    "normalized_at": "2026-09-29T19:22:50.021Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "25ecbe9a7469c18a",
@@ -333,7 +353,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.038Z",
-    "normalized_at": "2026-09-29T19:22:50.039Z"
+    "normalized_at": "2026-09-29T19:22:50.039Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "fbdc84e4e4c59126",
@@ -349,7 +370,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.057Z",
-    "normalized_at": "2026-09-29T19:22:50.057Z"
+    "normalized_at": "2026-09-29T19:22:50.057Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "8d00c1cc3046a1ae",
@@ -365,7 +387,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.107Z",
-    "normalized_at": "2026-09-29T19:22:50.108Z"
+    "normalized_at": "2026-09-29T19:22:50.108Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "32fdff68360dd76e",
@@ -381,7 +404,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.125Z",
-    "normalized_at": "2026-09-29T19:22:50.125Z"
+    "normalized_at": "2026-09-29T19:22:50.125Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "9d5e71ceaf8032a1",
@@ -397,7 +421,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.164Z",
-    "normalized_at": "2026-09-29T19:22:50.164Z"
+    "normalized_at": "2026-09-29T19:22:50.164Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "55c1e6149e6e96e5",
@@ -413,7 +438,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.283Z",
-    "normalized_at": "2026-09-29T19:22:50.283Z"
+    "normalized_at": "2026-09-29T19:22:50.283Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "dd2a3fea21024f40",
@@ -429,7 +455,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.326Z",
-    "normalized_at": "2026-09-29T19:22:50.326Z"
+    "normalized_at": "2026-09-29T19:22:50.326Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "c344b0db91e14695",
@@ -445,7 +472,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.362Z",
-    "normalized_at": "2026-09-29T19:22:50.362Z"
+    "normalized_at": "2026-09-29T19:22:50.362Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "089e62c84ca656be",
@@ -461,7 +489,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.381Z",
-    "normalized_at": "2026-09-29T19:22:50.381Z"
+    "normalized_at": "2026-09-29T19:22:50.381Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "f48f6d6753f95141",
@@ -477,7 +506,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.418Z",
-    "normalized_at": "2026-09-29T19:22:50.418Z"
+    "normalized_at": "2026-09-29T19:22:50.418Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "8597fa57860f42f8",
@@ -493,7 +523,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.432Z",
-    "normalized_at": "2026-09-29T19:22:50.432Z"
+    "normalized_at": "2026-09-29T19:22:50.432Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "1300cee3f1368914",
@@ -509,7 +540,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.465Z",
-    "normalized_at": "2026-09-29T19:22:50.466Z"
+    "normalized_at": "2026-09-29T19:22:50.466Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "b5da7dd39531cc39",
@@ -525,7 +557,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.485Z",
-    "normalized_at": "2026-09-29T19:22:50.485Z"
+    "normalized_at": "2026-09-29T19:22:50.485Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "bc34738a21e34d1a",
@@ -541,7 +574,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.502Z",
-    "normalized_at": "2026-09-29T19:22:50.503Z"
+    "normalized_at": "2026-09-29T19:22:50.503Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "6f0884d3cf2c657f",
@@ -557,7 +591,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.544Z",
-    "normalized_at": "2026-09-29T19:22:50.544Z"
+    "normalized_at": "2026-09-29T19:22:50.544Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "69d7e5df1fe3887a",
@@ -573,7 +608,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.598Z",
-    "normalized_at": "2026-09-29T19:22:50.598Z"
+    "normalized_at": "2026-09-29T19:22:50.598Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "d8a399c66d673828",
@@ -589,7 +625,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.660Z",
-    "normalized_at": "2026-09-29T19:22:50.660Z"
+    "normalized_at": "2026-09-29T19:22:50.660Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "f4fc60edbab32246",
@@ -605,7 +642,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.681Z",
-    "normalized_at": "2026-09-29T19:22:50.681Z"
+    "normalized_at": "2026-09-29T19:22:50.681Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "7c2b72f63c84b7a5",
@@ -621,7 +659,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.704Z",
-    "normalized_at": "2026-09-29T19:22:50.705Z"
+    "normalized_at": "2026-09-29T19:22:50.705Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "b4cecabaedbe2de0",
@@ -637,7 +676,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.739Z",
-    "normalized_at": "2026-09-29T19:22:50.739Z"
+    "normalized_at": "2026-09-29T19:22:50.739Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "24899f43953c7af1",
@@ -653,7 +693,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.765Z",
-    "normalized_at": "2026-09-29T19:22:50.765Z"
+    "normalized_at": "2026-09-29T19:22:50.765Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "13fea62b7c5f84ba",
@@ -669,7 +710,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.813Z",
-    "normalized_at": "2026-09-29T19:22:50.813Z"
+    "normalized_at": "2026-09-29T19:22:50.813Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "73c5e09c857b4f5b",
@@ -685,7 +727,8 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.838Z",
-    "normalized_at": "2026-09-29T19:22:50.838Z"
+    "normalized_at": "2026-09-29T19:22:50.838Z",
+    "source_site": "WeWorkRemotely"
   },
   {
     "id": "2cc02dd6566c18ec",
@@ -701,6 +744,602 @@
     "description": null,
     "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
     "fetched_at": "2026-09-29T19:22:50.860Z",
-    "normalized_at": "2026-09-29T19:22:50.860Z"
+    "normalized_at": "2026-09-29T19:22:50.860Z",
+    "source_site": "WeWorkRemotely"
+  },
+  {
+    "id": "c756ab5c49c627ba",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/galab-laboratories-gmbh/junior-finanzbuchhalter-accountant-in-teilzeit-hamburg-103254",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:42:34.988Z",
+    "normalized_at": "2026-10-01T19:42:34.988Z"
+  },
+  {
+    "id": "86bdfd50c778732b",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/opus-one-recruitment-gmbh/junior-controller-munich-12376",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:42:35.061Z",
+    "normalized_at": "2026-10-01T19:42:35.061Z"
+  },
+  {
+    "id": "d8964dd8207078f0",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/1komma5grad/junior-seo-ai-marketing-manager-berlin-324189",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:49.732Z",
+    "normalized_at": "2026-10-01T19:37:49.733Z"
+  },
+  {
+    "id": "afb00bb7fecb8cfd",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/coolback-gmbh/junior-controller-nuthe-urstromtal-477623",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:49.799Z",
+    "normalized_at": "2026-10-01T19:37:49.799Z"
+  },
+  {
+    "id": "3afdcb968643d816",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/proglove/remote-junior-solution-architect-dach-112134",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:49.889Z",
+    "normalized_at": "2026-10-01T19:37:49.889Z"
+  },
+  {
+    "id": "4206213fdae290b1",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/databuild-marketing-solutions/junior-projektmanager-brakel-248757",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:49.940Z",
+    "normalized_at": "2026-10-01T19:37:49.941Z"
+  },
+  {
+    "id": "551adb5f60031618",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/6pm-gmbh/junior-art-director-berlin-133887",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:49.990Z",
+    "normalized_at": "2026-10-01T19:37:49.990Z"
+  },
+  {
+    "id": "2f2804df595b9e95",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/bendl-investment-gmbh/trainee-finanzberatung-junior-finanzberater-erding-52160",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.015Z",
+    "normalized_at": "2026-10-01T19:37:50.015Z"
+  },
+  {
+    "id": "41274bc9869a3473",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/cyrus-digital-gmbh/junior-digital-marketing-manager-munchen-munich-14128",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.058Z",
+    "normalized_at": "2026-10-01T19:37:50.058Z"
+  },
+  {
+    "id": "6391a41d85dcee93",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/matchingcompany-powered-by-flexpeople-your-career-network/junior-controller-junior-finance-manager-gn-mit-entwicklungspotenzial-dusseldorf-405543",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.115Z",
+    "normalized_at": "2026-10-01T19:37:50.115Z"
+  },
+  {
+    "id": "f5b3dfa88a4ae859",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/elb-connect/junior-verkaufer-sales-trainee-magdeburg-94308",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.157Z",
+    "normalized_at": "2026-10-01T19:37:50.157Z"
+  },
+  {
+    "id": "04f1b817661bed54",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/liganova-gmbh/design-manager-all-genders-luxury-retail-stuttgart-293211",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.208Z",
+    "normalized_at": "2026-10-01T19:37:50.208Z"
+  },
+  {
+    "id": "be8b52a84dd7e91e",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/cosoft-computer-consulting-gmbh/junior-it-systemadministrator-junior-it-techniker-coesfeld-354701",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.261Z",
+    "normalized_at": "2026-10-01T19:37:50.261Z"
+  },
+  {
+    "id": "ddce154fceba7174",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/sides-simplydelivery-gmbh/junior-customer-success-specialist-berlin-67347",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.317Z",
+    "normalized_at": "2026-10-01T19:37:50.317Z"
+  },
+  {
+    "id": "adca510b07f023a2",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/haiilo-1/junior-fullstack-engineer-hamburg-410395",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.378Z",
+    "normalized_at": "2026-10-01T19:37:50.378Z"
+  },
+  {
+    "id": "48764a4fcf53351e",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/attek-solutions-gmbh/junior-fullstack-entwickler-fokus-nextjs-berlin-112090",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.474Z",
+    "normalized_at": "2026-10-01T19:37:50.474Z"
+  },
+  {
+    "id": "8a43f369b7c2951c",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/haeger-consulting-gmbh/junior-consultant-softwareentwicklung-java-spring-bonn-483571",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.582Z",
+    "normalized_at": "2026-10-01T19:37:50.582Z"
+  },
+  {
+    "id": "935ab46ab667655b",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/reeeliance/junior-data-engineer-hamburg-27322",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.708Z",
+    "normalized_at": "2026-10-01T19:37:50.709Z"
+  },
+  {
+    "id": "1cf95c10e1bd8001",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/holidu/junior-accountant-munich-182827",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.779Z",
+    "normalized_at": "2026-10-01T19:37:50.779Z"
+  },
+  {
+    "id": "7efdd899be5737ec",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/1komma50/junior-process-operations-manager-energy-berlin-318472",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.849Z",
+    "normalized_at": "2026-10-01T19:37:50.849Z"
+  },
+  {
+    "id": "7b734892dd97e806",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/1komma50/junior-seo-ai-marketing-manager-berlin-21224",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.947Z",
+    "normalized_at": "2026-10-01T19:37:50.947Z"
+  },
+  {
+    "id": "83e42a4fd3c956b1",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/palmer-hargreaves-gmbh/junior-art-director-i-hybrid-cologne-118244",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:50.994Z",
+    "normalized_at": "2026-10-01T19:37:50.994Z"
+  },
+  {
+    "id": "f38d61df53cf0a40",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/linear-service-gmbh/junior-full-stack-developer-nextjs-berlin-284166",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.035Z",
+    "normalized_at": "2026-10-01T19:37:51.036Z"
+  },
+  {
+    "id": "b44146ca40fe8c85",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/vadcare-gruppe/junior-projektsteuerer-junior-projektmanager-fur-pflege-und-seniorenimmobilien-oberursel-397992",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.075Z",
+    "normalized_at": "2026-10-01T19:37:51.075Z"
+  },
+  {
+    "id": "e1973e51feaed375",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/haeger-consulting-gmbh/junior-consultant-it-projektmanagement-schwerpunkt-requirements-engineering-business-analyse-bonn-352620",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.106Z",
+    "normalized_at": "2026-10-01T19:37:51.106Z"
+  },
+  {
+    "id": "20aa2e82cba211f8",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/robco/junior-production-engineer-munich-193188",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.152Z",
+    "normalized_at": "2026-10-01T19:37:51.152Z"
+  },
+  {
+    "id": "09eaf5f351e56f8f",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/1komma50/junior-go-to-market-project-manager-berlin-433654",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.216Z",
+    "normalized_at": "2026-10-01T19:37:51.216Z"
+  },
+  {
+    "id": "a3bea01ce52d044f",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/black-semiconductor-gmbh/junior-automation-engineer-facilities-scada-plc-aachen-6889",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.252Z",
+    "normalized_at": "2026-10-01T19:37:51.252Z"
+  },
+  {
+    "id": "2f51a00914306bcd",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/metergrid/junior-fullstack-developer-hamburg-452722",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.301Z",
+    "normalized_at": "2026-10-01T19:37:51.301Z"
+  },
+  {
+    "id": "d73543323ca27f8d",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/justwatch/junior-digital-pr-off-page-seo-berlin-400744",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.340Z",
+    "normalized_at": "2026-10-01T19:37:51.340Z"
+  },
+  {
+    "id": "a0b5f8aaed66bbec",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/holidu/junior-performance-marketing-manager-all-genders-munich-440794",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.401Z",
+    "normalized_at": "2026-10-01T19:37:51.401Z"
+  },
+  {
+    "id": "1277d547944a6286",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/justwatch/junior-product-manager-martech-berlin-241710",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.460Z",
+    "normalized_at": "2026-10-01T19:37:51.460Z"
+  },
+  {
+    "id": "aa13413223f4bdf3",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/brl/junior-system-engineer-microsoft-365-und-automatisierung-hamburg-141969",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.510Z",
+    "normalized_at": "2026-10-01T19:37:51.510Z"
+  },
+  {
+    "id": "e17e2e5556203b52",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/strachwitzgerhard-next-level-interact/junior-projektmanager-werbung-berlin-477461",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.561Z",
+    "normalized_at": "2026-10-01T19:37:51.562Z"
+  },
+  {
+    "id": "6c66e74bca7f5fb6",
+    "canonical_url": "https://www.arbeitnow.com/jobs/companies/evolveadapt-gmbh/junior-account-manager-essen-392596",
+    "title": "Junior Fullstack Engineer",
+    "company": "Haiilo 1",
+    "source_site": "Arbeitnow",
+    "location": "Hamburg",
+    "is_remote": false,
+    "job_type": "FULL_TIME",
+    "salary_min_usd": null,
+    "salary_max_usd": null,
+    "salary_raw": null,
+    "description": "At Haiilo, we're building the digital workplace that connects employees with the information that matters to them — reliably, efficiently, every day. With Haiilo employees find their flow at work. As our Junior Fullstack Engineer, you'll help accelerate feature delivery, improve quality, and scale the development of our AI Assistant while growing your skills alongside an experienced team. 🌟 What's in it for you: Access to OpenUp for you and 3 of your family/friends Urban Sports Club or Wellpass membership Lease a Bike scheme Deutschlandticket subsidy 30 days holiday + 2 additional self-care days Plenty of room to shape things in a growing software company Short decision-making paths and a collaborative engineering culture What you’ll do: Develop frontend and backend features for our AI Assistant Contribute to AI-powered product capabilities and integrations Support testing, maintenance, and continuous improvement of the platform Take an active role in shaping AI Assistant capabilities, from idea generation and solution design to implementation and delivery What we’re looking for: First hands-on experience with Angular and TypeScript First experience with Java and Spring Boot, through work, university, or personal projects Curiosity about AI technologies and an interest in topics like RAG and AI Assistants A collaborative mindset, eagerness to learn, and a proactive approach to solving problems We encourage you to apply even if your profile does not yet meet all the requirements for the position. At Haiilo we support your personal development as well as your individuality, no matter your background.",
+    "source_page": "https://www.arbeitnow.com/jobs/junior",
+    "fetched_at": "2026-10-01T19:37:51.613Z",
+    "normalized_at": "2026-10-01T19:37:51.613Z"
   }
 ]

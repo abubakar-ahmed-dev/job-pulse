@@ -1,4 +1,4 @@
-﻿import fs from "node:fs/promises";
+import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
 import { config } from "../config.js";
@@ -35,9 +35,21 @@ export class PoliteFetcher {
     this.userAgent = options.userAgent || config.scraperUserAgent;
     this.timeoutMs = options.timeoutMs || config.scraperTimeoutMs;
     this.delayMs = options.delayMs || config.scraperRequestDelayMs;
-    this.lastRequestTime = 0;
+    this.lastRequestTimes = new Map();
     this.cacheHits = 0;
     this.liveFetches = 0;
+  }
+
+  get lastRequestTime() {
+    let max = 0;
+    for (const time of this.lastRequestTimes.values()) {
+      if (time > max) max = time;
+    }
+    return max;
+  }
+
+  set lastRequestTime(time) {
+    this.lastRequestTimes.set("default", time);
   }
 
   async init() {
@@ -67,15 +79,23 @@ export class PoliteFetcher {
       }
     }
 
-    // 2. Enforce politeness delay between real network requests
+    // 2. Enforce politeness delay between real network requests (per hostname)
+    let hostname = "default";
+    try {
+      hostname = new URL(url).hostname;
+    } catch (e) {
+      hostname = "default";
+    }
+
     const now = Date.now();
-    const elapsedSinceLastReq = now - this.lastRequestTime;
+    const lastHostTime = this.lastRequestTimes.get(hostname) || 0;
+    const elapsedSinceLastReq = now - lastHostTime;
     if (elapsedSinceLastReq < this.delayMs) {
       await sleep(this.delayMs - elapsedSinceLastReq);
     }
 
     // 3. Make real polite network fetch
-    this.lastRequestTime = Date.now();
+    this.lastRequestTimes.set(hostname, Date.now());
     this.liveFetches++;
 
     const controller = new AbortController();

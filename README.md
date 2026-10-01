@@ -14,15 +14,17 @@ Built for the **FlyRank Backend Internship**, combining **Assignment W5 (The Pol
 
 ## 🎯 Target Classification & Web Ethics (W5 Stage 0)
 
-* **Target Site**: WeWorkRemotely (`https://weworkremotely.com`)
-* **Why**: Leading public board for authentic remote software engineering roles with standard semantic server-rendered HTML.
-* **Robots.txt Verification**: We requested and verified `https://weworkremotely.com/robots.txt`. It explicitly allows indexing with `User-agent: *` and `Allow: /`, disallowing only private member directories (`/admin/`, `/account/`, `/job-seekers/profile/`).
-* **Scope**: Exactly 3 catalogue pages (~40–60 listings) per scrape run.
-* **Data Collected**: Job title, hiring company, canonical product URL, raw and normalized salary bounds (USD), workplace policy, and full job description.
+* **Federated Targets**:
+  1. **WeWorkRemotely** (`https://weworkremotely.com`): Leading global board for authentic remote software engineering roles.
+  2. **Arbeitnow** (`https://www.arbeitnow.com/jobs/junior`): Underrated developer platform featuring dedicated junior developer, internship, and early-career tech positions across Europe and worldwide remote.
+* **Robots.txt & Politeness Verification**:
+  - We verified `robots.txt` for both targets. Both explicitly allow indexing under `User-agent: *`.
+  - Zero hostile anti-bot CAPTCHAs or login barriers.
+* **Data Collected**: Job title, hiring company, canonical product URL, source board provenance, raw and normalized salary bounds, workplace model, and full job description.
 * **Politeness Guarantees**:
-  - **Honest User-Agent**: Every request identifies the bot: `JobPulse/1.0 (+https://github.com/abubakar-ahmed-dev/job-pulse)`.
-  - **Rate Limiting**: Minimum 500ms delay between live network requests.
-  - **Disk Caching**: All fetched HTML is cached locally in `cache/`. Re-runs during development hit the cache with 0ms delay and zero server load.
+  - **Honest User-Agent**: Every request identifies the bot: `JobPulse/1.0 (+https://github.com/abubakar-ahmed-dev/job-pulse; contact: abubakar.ahmed.dev@gmail.com)`.
+  - **Per-Host Rate Limiting**: Minimum 500ms delay between live network requests per hostname.
+  - **Disk Caching**: All fetched HTML is cached locally in `cache/` (keyed by SHA256). Re-runs during development hit the cache with 0ms delay and zero server load.
   - **Sensible Timeouts**: Strict 5-second HTTP timeout per request.
 * **Ethics Declaration**:
   > *"I will not reuse this code on another site without checking its rules and terms first."*
@@ -249,6 +251,30 @@ Every request emits a structured metric line with token consumption:
   $$\text{Daily Input Cost} = 4.2 \times \$0.15 = \$0.63$$
   $$\text{Daily Output Cost} = 0.95 \times \$0.60 = \$0.57$$
   $$\mathbf{\text{Total Production Cost}} \approx \mathbf{\$1.20 \text{ per day}} \quad (\sim \$36.00/\text{month})$$
+
+---
+
+## 📥 1-Click Export Utilities (CSV, JSON, Markdown)
+
+JobPulse provides instant data export capabilities both from the web dashboard and through programmatic API endpoints:
+
+### 1. Web Dashboard
+Click the **📥 Export** dropdown in the Market Radar toolbar to instantly download the currently active, filtered positions:
+* **CSV**: Clean spreadsheet-ready table (RFC 4180 compliant with escaped quotes) with salary bounds, remote status, tags, and canonical links.
+* **JSON**: Complete structured data array with metadata envelope (`exported_at`, `total_records`, filter parameters).
+* **Markdown**: Formatted executive report with summary comparison table and collapsible decision dossiers.
+
+### 2. Programmatic API Endpoint
+```bash
+# Export filtered positions as CSV
+curl "http://localhost:3000/api/v1/jobs/export?format=csv&source=Arbeitnow" -o junior-jobs.csv
+
+# Export filtered positions as Markdown report
+curl "http://localhost:3000/api/v1/jobs/export?format=md" -o market-report.md
+
+# Export as JSON data
+curl "http://localhost:3000/api/v1/jobs/export?format=json&domain=backend" -o backend-jobs.json
+```
 
 ---
 

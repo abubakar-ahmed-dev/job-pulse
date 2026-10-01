@@ -1,4 +1,4 @@
-﻿import { z } from "zod";
+import { z } from "zod";
 
 /**
  * Raw scraped job listing schema directly from HTML parsing.
@@ -12,6 +12,7 @@ export const JobRawSchema = z.object({
   salary_raw: z.string().nullable().default(null),
   job_type_raw: z.string().nullable().default(null),
   description_raw: z.string().nullable().default(null),
+  source_site: z.string().default("WeWorkRemotely"),
   source_page: z.string().url("Source page must be a valid URL"),
   fetched_at: z.string().datetime("Fetched at must be a valid ISO-8601 UTC timestamp")
 });
@@ -25,6 +26,7 @@ export const JobNormalizedSchema = z.object({
   canonical_url: z.string().url("Canonical URL must be a valid URL"),
   title: z.string().min(1, "Title is required"),
   company: z.string().min(1, "Company is required"),
+  source_site: z.string().default("WeWorkRemotely"),
   location: z.string(),
   is_remote: z.boolean(),
   job_type: z.string(),
@@ -50,5 +52,9 @@ export const RunReportSchema = z.object({
   valid_records: z.number().nonnegative(),
   invalid_records: z.number().nonnegative(),
   failed_pages: z.number().nonnegative(),
-  failed_urls: z.array(z.string())
+  failed_urls: z.array(z.string()),
+  sources: z.record(z.object({
+    fetched: z.number().nonnegative(),
+    valid: z.number().nonnegative()
+  })).optional()
 });

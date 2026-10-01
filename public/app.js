@@ -335,20 +335,45 @@ async function checkSystemHealth() {
 // ==============================================================================
 function initRadarFeed() {
   const searchInput = document.getElementById("radar-search");
+  const sourceFilter = document.getElementById("filter-source");
   const domainFilter = document.getElementById("filter-domain");
   const seniorityFilter = document.getElementById("filter-seniority");
   const refreshBtn = document.getElementById("radar-refresh-btn");
   const batchBtn = document.getElementById("batch-enrich-btn");
 
   searchInput?.addEventListener("input", renderRadarFeed);
+  sourceFilter?.addEventListener("change", renderRadarFeed);
   domainFilter?.addEventListener("change", renderRadarFeed);
   seniorityFilter?.addEventListener("change", renderRadarFeed);
   refreshBtn?.addEventListener("click", loadRadarData);
 
+  // 1-Click Export Dropdown
+  const exportBtn = document.getElementById("export-dropdown-btn");
+  const exportMenu = document.getElementById("export-menu");
+
+  exportBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    exportMenu?.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!exportBtn?.contains(e.target) && !exportMenu?.contains(e.target)) {
+      exportMenu?.classList.add("hidden");
+    }
+  });
+
+  document.querySelectorAll(".export-menu-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const format = item.getAttribute("data-export-format");
+      exportMenu?.classList.add("hidden");
+      triggerExport(format);
+    });
+  });
+
   batchBtn?.addEventListener("click", async () => {
     batchBtn.disabled = true;
     const spinner = batchBtn.querySelector(".spinner");
-    spinner.classList.remove("hidden");
+    spinner?.classList.remove("hidden");
 
     try {
       const res = await fetch("/api/v1/jobs/batch-triage?limit=10", { method: "POST" });
@@ -360,9 +385,159 @@ function initRadarFeed() {
       alert(`Batch error: ${err.message}`);
     } finally {
       batchBtn.disabled = false;
-      spinner.classList.add("hidden");
+      spinner?.classList.add("hidden");
     }
   });
+}
+
+function getFilteredJobs() {
+  const searchVal = document.getElementById("radar-search")?.value.toLowerCase().trim() || "";
+  const sourceVal = document.getElementById("filter-source")?.value || "all";
+  const domainVal = document.getElementById("filter-domain")?.value || "all";
+  const seniorityVal = document.getElementById("filter-seniority")?.value || "all";
+
+  return marketJobs.filter((job) => {
+    const matchesSearch =
+      job.title.toLowerCase().includes(searchVal) ||
+      job.company.toLowerCase().includes(searchVal) ||
+      (job.triage?.tech_stack || []).some((t) => t.toLowerCase().includes(searchVal));
+
+    let matchesSource = true;
+    if (sourceVal !== "all") {
+      matchesSource = (job.source_site || "WeWorkRemotely") === sourceVal;
+    }
+
+    let matchesDomain = true;
+    if (domainVal !== "all") {
+      matchesDomain = job.triage?.domain === domainVal;
+    }
+
+    let matchesSeniority = true;
+    if (seniorityVal !== "all") {
+      matchesSeniority = job.triage?.seniority === seniorityVal;
+    }
+
+    return matchesSearch && matchesSource && matchesDomain && matchesSeniority;
+  });
+}
+
+function triggerExport(format) {
+  const filtered = getFilteredJobs();
+  if (filtered.length === 0) {
+    alert("No positions available to export with current filter selection.");
+    return;
+  }
+
+  if (format === "csv") {
+    exportToCsv(filtered);
+  } else if (format === "md") {
+    exportToMarkdown(filtered);
+  } else {
+    exportToJson(filtered);
+  }
+}
+
+function downloadFile(content, filename, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function exportToCsv(jobs) {
+  const headers = [
+    "ID", "Title", "Company", "Source", "Location", "Is Remote", "Job Type",
+    "Salary Raw", "Min Salary USD", "Max Salary USD", "Domain", "Seniority",
+    "Tech Stack", "Confidence", "Summary", "Canonical URL"
+  ];
+  const escapeCell = (val) => {
+    if (val === null || val === undefined) return '""';
+    const s = String(val).replace(/"/g, '""').replace(/\r?\n/g, " ");
+    return `"${s}"`;
+  };
+  const rows = jobs.map((j) => [
+    escapeCell(j.id),
+    escapeCell(j.title),
+    escapeCell(j.company),
+    escapeCell(j.source_site || "WeWorkRemotely"),
+    escapeCell(j.location),
+    escapeCell(j.is_remote ? "Yes" : "No"),
+    escapeCell(j.job_type),
+    escapeCell(j.salary_raw || ""),
+    escapeCell(j.salary_min_usd || ""),
+    escapeCell(j.salary_max_usd || ""),
+    escapeCell(j.triage?.domain || ""),
+    escapeCell(j.triage?.seniority || ""),
+    escapeCell((j.triage?.tech_stack || []).join("; ")),
+    escapeCell(j.triage?.confidence ? `${Math.round(j.triage.confidence * 100)}%` : ""),
+    escapeCell(j.triage?.one_sentence_summary || ""),
+    escapeCell(j.canonical_url)
+  ].join(","));
+
+  const csv = [headers.join(","), ...rows].join("\n");
+  const timestamp = new Date().toISOString().slice(0, 10);
+  downloadFile(csv, `jobpulse-positions-${timestamp}.csv`, "text/csv;charset=utf-8;");
+}
+
+function exportToJson(jobs) {
+  const payload = {
+    exported_at: new Date().toISOString(),
+    total_records: jobs.length,
+    filters: {
+      source: document.getElementById("filter-source")?.value || "all",
+      domain: document.getElementById("filter-domain")?.value || "all",
+      seniority: document.getElementById("filter-seniority")?.value || "all",
+      search: document.getElementById("radar-search")?.value || ""
+    },
+    jobs
+  };
+  const jsonStr = JSON.stringify(payload, null, 2);
+  const timestamp = new Date().toISOString().slice(0, 10);
+  downloadFile(jsonStr, `jobpulse-positions-${timestamp}.json`, "application/json;charset=utf-8;");
+}
+
+function exportToMarkdown(jobs) {
+  const timestamp = new Date().toISOString();
+  let md = `# ⚡ JobPulse Market Intelligence Export\n\n`;
+  md += `**Exported At**: ${timestamp}  \n`;
+  md += `**Total Positions**: ${jobs.length}  \n\n`;
+  md += `## Positions Overview\n\n`;
+  md += `| Role Title | Company | Source | Seniority | Domain | Remote | Listing |\n`;
+  md += `| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n`;
+
+  jobs.forEach((j) => {
+    const s = j.triage?.seniority || "-";
+    const d = j.triage?.domain || "-";
+    const rem = j.is_remote ? "Remote" : "On-site";
+    md += `| ${j.title.replace(/\|/g, "/")} | ${j.company.replace(/\|/g, "/")} | ${j.source_site || "WeWorkRemotely"} | ${s} | ${d} | ${rem} | [Direct Link](${j.canonical_url}) |\n`;
+  });
+
+  md += `\n## Detailed Dossiers\n\n`;
+  jobs.forEach((j, idx) => {
+    md += `### ${idx + 1}. ${j.title} — ${j.company}\n\n`;
+    md += `- **Source Platform**: ${j.source_site || "WeWorkRemotely"}\n`;
+    md += `- **Location**: ${j.location}\n`;
+    md += `- **Job Type**: ${j.job_type}\n`;
+    if (j.salary_raw) md += `- **Compensation**: ${j.salary_raw}\n`;
+    md += `- **Listing URL**: ${j.canonical_url}\n`;
+
+    if (j.triage) {
+      md += `\n> **AI Classification**: ${j.triage.one_sentence_summary}\n>\n`;
+      md += `> - **Domain**: \`${j.triage.domain}\` | **Seniority**: \`${j.triage.seniority}\` | **Confidence**: ${Math.round(j.triage.confidence * 100)}%\n`;
+      if (j.triage.tech_stack?.length) {
+        md += `> - **Tech Stack**: ${j.triage.tech_stack.map((t) => `\`${t}\``).join(", ")}\n`;
+      }
+    }
+    md += `\n---\n\n`;
+  });
+
+  const dateStr = timestamp.slice(0, 10);
+  downloadFile(md, `jobpulse-report-${dateStr}.md`, "text/markdown;charset=utf-8;");
 }
 
 async function loadRadarData() {
@@ -379,6 +554,15 @@ async function loadRadarData() {
     document.getElementById("stat-total-jobs").textContent = totalCount;
     document.getElementById("tab-jobs-count").textContent = totalCount;
 
+    // Update federated sources label
+    if (data.sources_summary) {
+      const parts = Object.entries(data.sources_summary).map(([src, count]) => `${src} (${count})`);
+      const labelEl = document.getElementById("stat-sources-label");
+      if (labelEl && parts.length > 0) {
+        labelEl.textContent = parts.join(" + ");
+      }
+    }
+
     renderRadarFeed();
   } catch (err) {
     grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--signal-red);">Failed to connect: ${err.message}</div>`;
@@ -386,29 +570,8 @@ async function loadRadarData() {
 }
 
 function renderRadarFeed() {
-  const searchVal = document.getElementById("radar-search")?.value.toLowerCase().trim() || "";
-  const domainVal = document.getElementById("filter-domain")?.value || "all";
-  const seniorityVal = document.getElementById("filter-seniority")?.value || "all";
   const grid = document.getElementById("radar-grid");
-
-  const filtered = marketJobs.filter((job) => {
-    const matchesSearch =
-      job.title.toLowerCase().includes(searchVal) ||
-      job.company.toLowerCase().includes(searchVal) ||
-      (job.triage?.tech_stack || []).some((t) => t.toLowerCase().includes(searchVal));
-
-    let matchesDomain = true;
-    if (domainVal !== "all") {
-      matchesDomain = job.triage?.domain === domainVal;
-    }
-
-    let matchesSeniority = true;
-    if (seniorityVal !== "all") {
-      matchesSeniority = job.triage?.seniority === seniorityVal;
-    }
-
-    return matchesSearch && matchesDomain && matchesSeniority;
-  });
+  const filtered = getFilteredJobs();
 
   grid.innerHTML = "";
 
@@ -425,6 +588,11 @@ function renderRadarFeed() {
     if (job.salary_raw) {
       salaryHtml = `<span class="meta-pill salary">${escapeHtml(job.salary_raw)}</span>`;
     }
+
+    const isArbeitnow = job.source_site === "Arbeitnow";
+    const sourceClass = isArbeitnow ? "source-arbeitnow" : "source-wwr";
+    const sourceLabel = isArbeitnow ? "Arbeitnow (Junior)" : "WeWorkRemotely";
+    const sourceBadge = `<span class="meta-pill source-tag ${sourceClass}">${escapeHtml(sourceLabel)}</span>`;
 
     let triageHighlight = "";
     if (job.triage) {
@@ -447,6 +615,7 @@ function renderRadarFeed() {
         </div>
       </div>
       <div class="card-pills">
+        ${sourceBadge}
         <span class="meta-pill">${escapeHtml(job.job_type || "Full-Time")}</span>
         ${salaryHtml}
       </div>
