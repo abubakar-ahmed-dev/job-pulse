@@ -390,6 +390,84 @@ function initRadarFeed() {
   });
 }
 
+function getJobDomain(job) {
+  const title = job.title || "";
+  const desc = job.description || "";
+  const text = `${title} ${desc}`.toLowerCase();
+
+  // Filter explicit non-technical / corporate roles (Accountant, Finance Controller, HR, Sales, Legal)
+  const isExplicitNonTech = /accountant|buchhalter|controller|finanz|finance|hr\b|recruiter|sales|assistenz|office|jurist|legal|sachbearbeiter/i.test(title);
+  if (isExplicitNonTech) return "other";
+
+  if (job.triage?.domain && job.triage.domain !== "other") {
+    return job.triage.domain;
+  }
+
+  // 1. Direct title matching (highest authority)
+  if (/security|penetration|infosec|appsec/i.test(title)) return "security";
+  if (/machine learning|\bml\b|data\s*(engineer|scientist|analyst)|deep learning|\bai\b|artificial intelligence|prompt engineer/i.test(title)) return "data_ai";
+  if (/devops|sre\b|platform engineer|infrastructure|cloud\s*(engineer|architect)/i.test(title)) return "devops_cloud";
+  if (/\b(ios|android|swift|flutter|react native)\b/i.test(title) || /\bmobile\s*(app|developer|engineer|client)\b/i.test(title)) return "mobile";
+  if (/full[- ]?stack/i.test(title)) return "fullstack";
+  if (/frontend|front[- ]?end|ui[\/ ]ux|react|vue|angular/i.test(title)) return "frontend";
+  if (/backend|back[- ]?end|server|database|distributed systems|\bapi\b developer/i.test(title)) return "backend";
+
+  // 2. Fallback to description / triage
+  if (job.triage?.domain) return job.triage.domain;
+  if (/security|penetration|owasp|infosec|appsec/i.test(text)) return "security";
+  if (/machine learning|\bml\b|data scientist|deep learning|pytorch|tensorflow/i.test(text)) return "data_ai";
+  if (/devops|sre\b|platform engineer|infrastructure|kubernetes|terraform/i.test(text)) return "devops_cloud";
+  if (/\b(ios|android|swift|flutter|react native)\b/i.test(text) || /\bmobile\s*(app|developer|engineer)\b/i.test(text)) return "mobile";
+  if (/full[- ]?stack/i.test(text) || (/\breact\b/i.test(text) && /\b(node|python|go)\b/i.test(text))) return "fullstack";
+  if (/frontend/i.test(desc) && !/backend|server/i.test(desc)) return "frontend";
+  if (/backend|back[- ]?end|microservices|distributed systems|\bapi\b|\bsql\b|\bpostgres/i.test(desc)) return "backend";
+
+  return "other";
+}
+
+function getJobSeniority(job) {
+  if (job.triage?.seniority && job.triage.seniority !== "unspecified") {
+    return job.triage.seniority;
+  }
+  const title = job.title || "";
+  const desc = job.description || "";
+
+  if (/\b(senior|sr\.?)\b/i.test(title)) return "senior";
+  if (/\b(staff|principal|lead|guild lead)\b/i.test(title)) return "lead";
+  if (/\b(cto|vp|director|head of)\b/i.test(title)) return "executive";
+  if (/\b(junior|jr\.?|entry|intern|graduate|bootcamp|werkstudent)\b/i.test(title) || /1\s*year experience|boot\s*camp graduate/i.test(desc)) return "junior";
+  if (/5\+\s*years|6\+\s*years|7\+\s*years|8\+\s*years/i.test(desc)) return "senior";
+  if (/software engineer|developer|engineer|specialist|consultant/i.test(title)) return "mid";
+
+  return job.triage?.seniority || "unspecified";
+}
+
+function formatDomainLabel(domain) {
+  const map = {
+    backend: "Backend",
+    frontend: "Frontend",
+    fullstack: "Fullstack",
+    devops_cloud: "DevOps & Cloud",
+    data_ai: "Data & AI",
+    mobile: "Mobile",
+    security: "Security",
+    other: "Other"
+  };
+  return map[domain] || domain;
+}
+
+function formatSeniorityLabel(seniority) {
+  const map = {
+    junior: "Junior",
+    mid: "Mid-Level",
+    senior: "Senior",
+    lead: "Lead / Staff",
+    executive: "Executive",
+    unspecified: "Unspecified"
+  };
+  return map[seniority] || seniority;
+}
+
 function getFilteredJobs() {
   const searchVal = document.getElementById("radar-search")?.value.toLowerCase().trim() || "";
   const sourceVal = document.getElementById("filter-source")?.value || "all";
@@ -397,9 +475,14 @@ function getFilteredJobs() {
   const seniorityVal = document.getElementById("filter-seniority")?.value || "all";
 
   return marketJobs.filter((job) => {
+    const jobDomain = getJobDomain(job);
+    const jobSeniority = getJobSeniority(job);
+
     const matchesSearch =
       job.title.toLowerCase().includes(searchVal) ||
       job.company.toLowerCase().includes(searchVal) ||
+      jobDomain.toLowerCase().includes(searchVal) ||
+      jobSeniority.toLowerCase().includes(searchVal) ||
       (job.triage?.tech_stack || []).some((t) => t.toLowerCase().includes(searchVal));
 
     let matchesSource = true;
@@ -409,12 +492,12 @@ function getFilteredJobs() {
 
     let matchesDomain = true;
     if (domainVal !== "all") {
-      matchesDomain = job.triage?.domain === domainVal;
+      matchesDomain = jobDomain === domainVal;
     }
 
     let matchesSeniority = true;
     if (seniorityVal !== "all") {
-      matchesSeniority = job.triage?.seniority === seniorityVal;
+      matchesSeniority = jobSeniority === seniorityVal;
     }
 
     return matchesSearch && matchesSource && matchesDomain && matchesSeniority;
@@ -589,20 +672,42 @@ function renderRadarFeed() {
       salaryHtml = `<span class="meta-pill salary">${escapeHtml(job.salary_raw)}</span>`;
     }
 
+    const domain = getJobDomain(job);
+    const seniority = getJobSeniority(job);
+    const domainLabel = formatDomainLabel(domain);
+    const seniorityLabel = formatSeniorityLabel(seniority);
+
     const isArbeitnow = job.source_site === "Arbeitnow";
     const sourceClass = isArbeitnow ? "source-arbeitnow" : "source-wwr";
     const sourceLabel = isArbeitnow ? "Arbeitnow (Junior)" : "WeWorkRemotely";
     const sourceBadge = `<span class="meta-pill source-tag ${sourceClass}">${escapeHtml(sourceLabel)}</span>`;
 
+    const domainBadge = `<span class="meta-pill domain-tag domain-${domain}">${escapeHtml(domainLabel)}</span>`;
+    const seniorityBadge = `<span class="meta-pill seniority-tag seniority-${seniority}">${escapeHtml(seniorityLabel)}</span>`;
+
+    let techStackHtml = "";
+    if (job.triage?.tech_stack && job.triage.tech_stack.length > 0) {
+      techStackHtml = `
+        <div class="card-tech-stack">
+          ${job.triage.tech_stack.slice(0, 5).map(t => `<span class="tech-chip">${escapeHtml(t)}</span>`).join("")}
+        </div>
+      `;
+    }
+
     let triageHighlight = "";
     if (job.triage) {
       triageHighlight = `
         <div class="triage-highlight-box">
-          <div style="display:flex; justify-content:space-between; margin-bottom: 0.25rem;">
-            <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--copper-primary); text-transform:uppercase;">${escapeHtml(job.triage.seniority)} &middot; ${escapeHtml(job.triage.domain)}</span>
-            <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted);">${Math.round(job.triage.confidence * 100)}% conf</span>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.35rem;">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--copper-primary); text-transform:uppercase;">
+              ✨ AI Triage &middot; ${escapeHtml(job.triage.seniority)} &middot; ${escapeHtml(job.triage.domain)}
+            </span>
+            <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted); background:var(--surface-3); padding:0.1rem 0.35rem; border-radius:var(--radius-xs);">
+              ${Math.round(job.triage.confidence * 100)}% conf
+            </span>
           </div>
           <p>${escapeHtml(job.triage.one_sentence_summary)}</p>
+          ${techStackHtml}
         </div>
       `;
     }
@@ -616,6 +721,8 @@ function renderRadarFeed() {
       </div>
       <div class="card-pills">
         ${sourceBadge}
+        ${domainBadge}
+        ${seniorityBadge}
         <span class="meta-pill">${escapeHtml(job.job_type || "Full-Time")}</span>
         ${salaryHtml}
       </div>

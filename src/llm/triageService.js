@@ -139,37 +139,61 @@ function synthesizeSemanticTriage(inputData) {
     }
   }
 
-  // 3. Domain determination (Check specific domains first)
+  // 3. Domain determination
   let domain = "other";
-  if (/security|penetration|owasp|infosec|appsec|vulnerability/i.test(text)) {
-    domain = "security";
-  } else if (/machine learning|\bml\b|data scientist|deep learning|pytorch|tensorflow/i.test(text) || /\bai\b/i.test(title)) {
-    domain = "data_ai";
-  } else if (/devops|sre|platform engineer|infrastructure|kubernetes|terraform/i.test(text) || (/cloud/i.test(text) && !/microservices/i.test(desc))) {
-    domain = "devops_cloud";
-  } else if (/mobile|ios|android|swift|flutter/i.test(text)) {
-    domain = "mobile";
-  } else if (/full[- ]?stack/i.test(title) || (/\breact\b/i.test(text) && /\b(node|python|go)\b/i.test(text))) {
-    domain = "fullstack";
-  } else if (/frontend|ui|ux|react|vue|angular|css/i.test(title) || (/frontend/i.test(desc) && !/backend|server/i.test(desc))) {
-    domain = "frontend";
-  } else if (/backend|api|server|microservices|distributed|database|sql|go\b|python|django|flask/i.test(title) || /backend|microservices|rest api/i.test(desc)) {
-    domain = "backend";
+
+  // Filter non-technical / corporate roles (Accountant, Finance Controller, HR, Sales, Legal)
+  const isExplicitNonTech = /accountant|buchhalter|controller|finanz|finance|hr\b|recruiter|sales|assistenz|office|jurist|legal|sachbearbeiter/i.test(title);
+
+  if (!isExplicitNonTech) {
+    // 1. Direct title matching (highest authority)
+    if (/security|penetration|infosec|appsec/i.test(title)) {
+      domain = "security";
+    } else if (/machine learning|\bml\b|data\s*(engineer|scientist|analyst)|deep learning|\bai\b|artificial intelligence|prompt engineer/i.test(title)) {
+      domain = "data_ai";
+    } else if (/devops|sre\b|platform engineer|infrastructure|cloud\s*(engineer|architect)/i.test(title)) {
+      domain = "devops_cloud";
+    } else if (/\b(ios|android|swift|flutter|react native)\b/i.test(title) || /\bmobile\s*(app|developer|engineer|client)\b/i.test(title)) {
+      domain = "mobile";
+    } else if (/full[- ]?stack/i.test(title)) {
+      domain = "fullstack";
+    } else if (/frontend|front[- ]?end|ui[\/ ]ux|react|vue|angular/i.test(title)) {
+      domain = "frontend";
+    } else if (/backend|back[- ]?end|server|database|distributed systems|\bapi\b developer/i.test(title)) {
+      domain = "backend";
+    }
+
+    // 2. Fallback to body content if title didn't specify domain
+    if (domain === "other") {
+      if (/security|penetration|owasp|infosec|appsec|vulnerability/i.test(text)) {
+        domain = "security";
+      } else if (/machine learning|\bml\b|data scientist|deep learning|pytorch|tensorflow/i.test(text)) {
+        domain = "data_ai";
+      } else if (/devops|sre\b|platform engineer|infrastructure|kubernetes|terraform/i.test(text)) {
+        domain = "devops_cloud";
+      } else if (/\b(ios|android|swift|flutter|react native)\b/i.test(text) || /\bmobile\s*(app|developer|engineer)\b/i.test(text)) {
+        domain = "mobile";
+      } else if (/full[- ]?stack/i.test(text) || (/\breact\b/i.test(text) && /\b(node|python|go)\b/i.test(text))) {
+        domain = "fullstack";
+      } else if (/frontend/i.test(desc) && !/backend|server/i.test(desc)) {
+        domain = "frontend";
+      } else if (/backend|back[- ]?end|microservices|distributed systems|\bapi\b|\bsql\b|\bpostgres/i.test(desc)) {
+        domain = "backend";
+      }
+    }
   }
 
   // 4. Seniority determination
   let seniority = "unspecified";
-  if (domain === "other") {
-    seniority = "unspecified";
-  } else if (/\b(senior|sr\.?)\b/i.test(title)) {
+  if (/\b(senior|sr\.?)\b/i.test(title)) {
     seniority = "senior";
   } else if (/\b(staff|principal|lead|guild lead|head of|director|vp|cto)\b/i.test(title)) {
     seniority = /\b(cto|vp|director|head of)\b/i.test(title) ? "executive" : "lead";
-  } else if (/\b(junior|jr\.?|entry|intern|graduate|bootcamp)\b/i.test(title) || /1\s*year experience|boot\s*camp graduate/i.test(desc)) {
+  } else if (/\b(junior|jr\.?|entry|intern|graduate|bootcamp|werkstudent)\b/i.test(title) || /1\s*year experience|boot\s*camp graduate/i.test(desc)) {
     seniority = "junior";
   } else if (/5\+\s*years|6\+\s*years|7\+\s*years|8\+\s*years/i.test(desc)) {
     seniority = "senior";
-  } else if (/software engineer|developer|engineer|specialist/i.test(title)) {
+  } else if (domain !== "other" && /software engineer|developer|engineer|specialist|consultant/i.test(title)) {
     seniority = "mid";
   }
 

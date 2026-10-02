@@ -733,6 +733,120 @@ p, li {
   border-color: var(--copper-border);
 }
 
+/* Domain Badges */
+.meta-pill.domain-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.meta-pill.domain-backend {
+  background-color: rgba(59, 130, 246, 0.14);
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.meta-pill.domain-frontend {
+  background-color: rgba(168, 85, 247, 0.14);
+  color: #d8b4fe;
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+.meta-pill.domain-fullstack {
+  background-color: rgba(236, 72, 153, 0.14);
+  color: #f472b6;
+  border-color: rgba(236, 72, 153, 0.35);
+}
+
+.meta-pill.domain-devops_cloud {
+  background-color: rgba(14, 165, 233, 0.14);
+  color: #7dd3fc;
+  border-color: rgba(14, 165, 233, 0.35);
+}
+
+.meta-pill.domain-data_ai {
+  background-color: rgba(34, 197, 94, 0.14);
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.meta-pill.domain-mobile {
+  background-color: rgba(245, 158, 11, 0.14);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.meta-pill.domain-security {
+  background-color: rgba(239, 68, 68, 0.14);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.meta-pill.domain-other {
+  background-color: rgba(156, 163, 175, 0.12);
+  color: #d1d5db;
+  border-color: rgba(156, 163, 175, 0.3);
+}
+
+/* Seniority Badges */
+.meta-pill.seniority-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.meta-pill.seniority-junior {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.meta-pill.seniority-mid {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.meta-pill.seniority-senior {
+  background-color: rgba(249, 115, 22, 0.14);
+  color: #fdba74;
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
+.meta-pill.seniority-lead,
+.meta-pill.seniority-executive {
+  background-color: rgba(234, 179, 8, 0.14);
+  color: #fde047;
+  border-color: rgba(234, 179, 8, 0.35);
+}
+
+.meta-pill.seniority-unspecified {
+  background-color: var(--surface-3);
+  color: var(--text-muted);
+  border-color: var(--border-subtle);
+}
+
+/* Tech stack chips in card */
+.card-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.tech-chip {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--surface-3);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
 .triage-highlight-box {
   background-color: var(--surface-2);
   border-left: 2px solid var(--copper-primary);
