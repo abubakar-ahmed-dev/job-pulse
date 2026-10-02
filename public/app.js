@@ -630,7 +630,15 @@ async function loadRadarData() {
   try {
     const res = await fetch("/api/v1/jobs/list");
     const data = await res.json();
-    marketJobs = data.jobs || [];
+
+    // Client-side deduplication safeguard (Title + Company identity)
+    const seenIdentities = new Set();
+    marketJobs = (data.jobs || []).filter((j) => {
+      const key = `${(j.title || "").trim().toLowerCase()}|||${(j.company || "").trim().toLowerCase()}`;
+      if (seenIdentities.has(key)) return false;
+      seenIdentities.add(key);
+      return true;
+    });
 
     // Update counts
     const totalCount = marketJobs.length;

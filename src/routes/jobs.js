@@ -219,7 +219,23 @@ async function loadStoredJobs() {
     // jobs-enriched.json missing
   }
 
-  return Array.from(jobsMap.values());
+  // 3. Semantic Deduplication: eliminate duplicate (Title + Company) and synthetic failure fixtures
+  const seenIdentities = new Set();
+  const dedupedJobs = [];
+
+  for (const job of jobsMap.values()) {
+    if (!job.title || !job.canonical_url) continue;
+    // Exclude synthetic broken test fixtures if any leaked
+    if (job.canonical_url.includes("fake") || job.canonical_url.includes("404")) continue;
+
+    const identityKey = `${job.title.trim().toLowerCase()}|||${(job.company || "").trim().toLowerCase()}`;
+    if (!seenIdentities.has(identityKey)) {
+      seenIdentities.add(identityKey);
+      dedupedJobs.push(job);
+    }
+  }
+
+  return dedupedJobs;
 }
 
 /**

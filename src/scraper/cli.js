@@ -193,8 +193,19 @@ export async function runScraperPipeline(options = {}) {
 
       // Stage 4: Normalize & Validate with Zod
       const normalizedRecord = normalizeJob(rawRecord);
-      validJobs.set(normalizedRecord.canonical_url, normalizedRecord);
-      sourceStats[target.name].valid++;
+
+      // Deduplicate by (Title + Company) across discovered listings
+      const identityKey = `${normalizedRecord.title.toLowerCase().trim()}|||${(normalizedRecord.company || "").toLowerCase().trim()}`;
+      const existingWithSameIdentity = Array.from(validJobs.values()).find(
+        (j) => `${j.title.toLowerCase().trim()}|||${(j.company || "").toLowerCase().trim()}` === identityKey
+      );
+
+      if (existingWithSameIdentity && existingWithSameIdentity.canonical_url !== normalizedRecord.canonical_url) {
+        console.log(`   🔁 Deduplicated duplicate role: "${normalizedRecord.title}" at "${normalizedRecord.company}" (already indexed under ${existingWithSameIdentity.canonical_url})`);
+      } else {
+        validJobs.set(normalizedRecord.canonical_url, normalizedRecord);
+        sourceStats[target.name].valid++;
+      }
     } catch (err) {
       console.warn(`   ⚠️ Handled failure for ${jobUrl}: ${err.message}`);
       failedUrls.push(jobUrl);
@@ -207,8 +218,10 @@ export async function runScraperPipeline(options = {}) {
     }
   }
 
-  // Write good records to output/jobs.json
-  const goodRecords = Array.from(validJobs.values());
+  // Write good records to output/jobs.json (excluding synthetic test URLs)
+  const goodRecords = Array.from(validJobs.values()).filter(
+    (j) => !j.canonical_url?.includes("fake") && !j.canonical_url?.includes("404")
+  );
   await fs.writeFile(jobsOutputPath, JSON.stringify(goodRecords, null, 2), "utf-8");
 
   // Write bad records to output/errors.json
