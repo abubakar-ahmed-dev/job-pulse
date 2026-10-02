@@ -16,11 +16,12 @@ This document presents the complete submission for **Week 5 Assignment A9: "The 
 The goal of this assignment is to design, construct, and verify an end-to-end web scraping pipeline that extracts unstructured HTML from public tech job boards, transforms it into clean, schema-validated JSON records, survives network and HTML failures gracefully, respects server load, and produces an honest, cryptographic audit report after every execution.
 
 Rather than a simple one-off script, **JobPulse** is engineered as a robust, production-grade ingestion service adhering to the **Six-Stage Scraper Lifecycle**:
-$$\text{Classify} \longrightarrow \text{Fetch} \longrightarrow \text{Extract} \longrightarrow \text{Normalize} \longrightarrow \text{Validate} \longrightarrow \text{Store \& Report}$$
+
+$$\text{Classify} \longrightarrow \text{Fetch} \longrightarrow \text{Extract} \longrightarrow \text{Normalize} \longrightarrow \text{Validate} \longrightarrow \text{Store and Report}$$
 
 ### The Three Professional Habits Upheld:
 1. **Check Before You Collect**: Full target classification, `robots.txt` auditing, and ethics declaration completed before writing ingestion code.
-2. **Be a Polite Guest**: Transparent, honest User-Agent with contact metadata, strict per-host rate limiting ($\ge 500\text{ms}$ delay), strict 5-second timeouts, and persistent local disk caching.
+2. **Be a Polite Guest**: Transparent, honest User-Agent with contact metadata, strict per-host rate limiting (≥ 500ms delay), strict 5-second timeouts, and persistent local disk caching.
 3. **Trust Nothing You Scraped**: Every scraped field is treated as untrusted external input. Values undergo strict normalization, dual raw/cleaned provenance storage, and schema validation with Zod.
 
 ---
@@ -294,7 +295,7 @@ Before any network request was issued, our targets were classified and evaluated
 | **Disk caching (FETCH vs CACHE HIT)** | Stage 1 | `src/scraper/fetcher.js` | `cache/*.html` files created; 0ms on rerun | **PASSED** |
 | **Discover 3 catalogue pages** | Stage 2 | `src/scraper/cli.js` | Discovers listings across pages 1–3 | **PASSED** |
 | **URL resolution with new URL()** | Stage 2 | `src/scraper/parsers/` | `test/scraper.test.js` (Test #2) | **PASSED** |
-| **Delay $ge 500\text{ms}$ between live requests** | Stage 2 | `src/scraper/fetcher.js` | Per-host sleep timers enforced | **PASSED** |
+| **Delay ≥ 500ms between live requests** | Stage 2 | `src/scraper/fetcher.js` | Per-host sleep timers enforced | **PASSED** |
 | **Deduplication of links** | Stage 2 | `src/scraper/cli.js` | `test/scraper.test.js` (Test #4) | **PASSED** |
 | **Extract 8 raw fields + Provenance** | Stage 3 | `src/schemas/jobSchema.js` | `JobRawSchema` validation | **PASSED** |
 | **Missing description as null** | Stage 3 | `src/scraper/parsers/` | `test/scraper.test.js` (Test #3) | **PASSED** |
@@ -303,7 +304,7 @@ Before any network request was issued, our targets were classified and evaluated
 | **Idempotency: rerun does not duplicate** | Stage 4 | `src/scraper/cli.js` | Canonical URL key map in `jobs.json` | **PASSED** |
 | **Survive 1 bad page without crashing** | Stage 5 | `src/scraper/cli.js` | `node src/scraper/cli.js --test-failure` | **PASSED** |
 | **Generate run-report.json** | Stage 5 | `src/scraper/reporter.js` | `output/run-report.json` generated | **PASSED** |
-| **Unit tests $ge 5$ cases** | Stretch | `test/scraper.test.js` | 7 passing unit tests (`npm test`) | **PASSED** |
+| **Unit tests ≥ 5 cases** | Stretch | `test/scraper.test.js` | 7 passing unit tests (`npm test`) | **PASSED** |
 | **Public GitHub repo with 7+ commits** | Stage 6 | Git repository | `git log --oneline` shows 10+ commits | **PASSED** |
 
 ---
