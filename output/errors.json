@@ -1,7 +1,32 @@
 [
   {
-    "url": "https://weworkremotely.com/remote-jobs/fake-nonexistent-job-404-test",
-    "error": "HTTP 404 Not Found: Simulated dead page for https://weworkremotely.com/remote-jobs/fake-nonexistent-job-404-test",
-    "timestamp": "2026-09-29T19:03:35.758Z"
+    "url": "https://www.arbeitnow.com/jobs/companies/proglove/remote-junior-solution-architect-dach-112134",
+    "source": "Arbeitnow",
+    "error": "HTTP fetch failed with status 429: Too Many Requests",
+    "timestamp": "2026-10-02T05:33:14.199Z"
+  },
+  {
+    "url": "https://www.arbeitnow.com/jobs/companies/roadsurfer/freiburg-junior-fuhrparkleiter-freiburg-basel-413996",
+    "source": "Arbeitnow",
+    "error": "HTTP fetch failed with status 429: Too Many Requests",
+    "timestamp": "2026-10-02T05:33:14.871Z"
+  },
+  {
+    "url": "https://www.arbeitnow.com/jobs/companies/metergrid/junior-fullstack-developer-hamburg-452722",
+    "source": "Arbeitnow",
+    "error": "HTTP fetch failed with status 429: Too Many Requests",
+    "timestamp": "2026-10-02T05:33:15.435Z"
+  },
+  {
+    "url": "https://www.arbeitnow.com/jobs/companies/justwatch/junior-digital-pr-off-page-seo-berlin-400744",
+    "source": "Arbeitnow",
+    "error": "HTTP fetch failed with status 429: Too Many Requests",
+    "timestamp": "2026-10-02T05:33:15.894Z"
+  },
+  {
+    "url": "https://www.arbeitnow.com/jobs/companies/linear-service-gmbh/junior-full-stack-developer-nextjs-berlin-284166/apply",
+    "source": "Arbeitnow",
+    "error": "HTTP fetch failed with status 429: Too Many Requests",
+    "timestamp": "2026-10-02T05:33:16.539Z"
   }
 ]

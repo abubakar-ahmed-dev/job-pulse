@@ -109,13 +109,31 @@ jobsRouter.post("/triage", async (req, res) => {
 jobsRouter.post("/batch-triage", async (req, res) => {
   const limit = parseInt(req.query.limit || "5", 10);
   const jobsPath = path.join(config.outputDir, "jobs.json");
+  const enrichedPath = path.join(config.outputDir, "jobs-enriched.json");
 
   try {
     const rawData = await fs.readFile(jobsPath, "utf-8");
     const jobs = JSON.parse(rawData.replace(/^\uFEFF/, ""));
-    const toProcess = jobs.slice(0, limit);
 
-    const enriched = [];
+    // 1. Load existing enriched map so we preserve prior triage results
+    const enrichedMap = new Map();
+    try {
+      const existingData = await fs.readFile(enrichedPath, "utf-8");
+      const existingEnriched = JSON.parse(existingData.replace(/^\uFEFF/, ""));
+      if (Array.isArray(existingEnriched)) {
+        existingEnriched.forEach((j) => {
+          if (j.canonical_url) enrichedMap.set(j.canonical_url, j);
+        });
+      }
+    } catch {
+      // No existing enriched jobs file yet
+    }
+
+    // 2. Select unenriched jobs first (or fallback to slice)
+    const unenrichedJobs = jobs.filter((j) => !enrichedMap.has(j.canonical_url) || !enrichedMap.get(j.canonical_url).triage);
+    const toProcess = (unenrichedJobs.length > 0 ? unenrichedJobs : jobs).slice(0, limit);
+
+    const newlyEnriched = [];
     for (const job of toProcess) {
       if (!job.description) continue;
       const { result } = await triageJob({
@@ -123,21 +141,24 @@ jobsRouter.post("/batch-triage", async (req, res) => {
         company: job.company,
         description: job.description
       });
-      enriched.push({
+      const enrichedEntry = {
         ...job,
         source_site: job.source_site || (job.canonical_url.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely"),
         triage: result
-      });
+      };
+      enrichedMap.set(job.canonical_url, enrichedEntry);
+      newlyEnriched.push(enrichedEntry);
     }
 
-    const enrichedPath = path.join(config.outputDir, "jobs-enriched.json");
-    await fs.writeFile(enrichedPath, JSON.stringify(enriched, null, 2), "utf-8");
+    const allEnriched = Array.from(enrichedMap.values());
+    await fs.writeFile(enrichedPath, JSON.stringify(allEnriched, null, 2), "utf-8");
 
     res.json({
-      message: `Successfully enriched ${enriched.length} jobs`,
-      enriched_count: enriched.length,
+      message: `Successfully enriched ${newlyEnriched.length} jobs (Total enriched in store: ${allEnriched.length})`,
+      enriched_count: newlyEnriched.length,
+      total_enriched: allEnriched.length,
       output_file: "output/jobs-enriched.json",
-      sample: enriched[0] || null
+      sample: newlyEnriched[0] || allEnriched[0] || null
     });
   } catch (err) {
     res.status(500).json({ error: "Failed to run batch triage", message: err.message });
@@ -145,31 +166,60 @@ jobsRouter.post("/batch-triage", async (req, res) => {
 });
 
 /**
- * Helper to load current jobs (enriched preferred, fallback to raw)
+ * Helper to load current jobs:
+ * Always loads all records from jobs.json, merging any enriched triage data from jobs-enriched.json.
  */
 async function loadStoredJobs() {
-  const enrichedPath = path.join(config.outputDir, "jobs-enriched.json");
   const rawPath = path.join(config.outputDir, "jobs.json");
+  const enrichedPath = path.join(config.outputDir, "jobs-enriched.json");
 
+  const jobsMap = new Map();
+
+  // 1. Load all verified scraped jobs from jobs.json
   try {
-    const data = await fs.readFile(enrichedPath, "utf-8");
-    const jobs = JSON.parse(data.replace(/^\uFEFF/, ""));
-    return jobs.map((j) => ({
-      ...j,
-      source_site: j.source_site || (j.canonical_url.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely")
-    }));
-  } catch (e) {
-    try {
-      const data = await fs.readFile(rawPath, "utf-8");
-      const jobs = JSON.parse(data.replace(/^\uFEFF/, ""));
-      return jobs.map((j) => ({
-        ...j,
-        source_site: j.source_site || (j.canonical_url.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely")
-      }));
-    } catch (err) {
-      return [];
+    const rawData = await fs.readFile(rawPath, "utf-8");
+    const rawJobs = JSON.parse(rawData.replace(/^\uFEFF/, ""));
+    if (Array.isArray(rawJobs)) {
+      rawJobs.forEach((j) => {
+        const canonical = j.canonical_url;
+        jobsMap.set(canonical, {
+          ...j,
+          source_site: j.source_site || (canonical.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely")
+        });
+      });
     }
+  } catch (err) {
+    // jobs.json missing or unreadable
   }
+
+  // 2. Overlay any enriched triage dossiers from jobs-enriched.json
+  try {
+    const enrichedData = await fs.readFile(enrichedPath, "utf-8");
+    const enrichedJobs = JSON.parse(enrichedData.replace(/^\uFEFF/, ""));
+    if (Array.isArray(enrichedJobs)) {
+      enrichedJobs.forEach((ej) => {
+        const canonical = ej.canonical_url;
+        if (jobsMap.has(canonical)) {
+          const existing = jobsMap.get(canonical);
+          jobsMap.set(canonical, {
+            ...existing,
+            ...ej,
+            source_site: existing.source_site || ej.source_site || (canonical.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely"),
+            triage: ej.triage || existing.triage
+          });
+        } else {
+          jobsMap.set(canonical, {
+            ...ej,
+            source_site: ej.source_site || (canonical.includes("arbeitnow") ? "Arbeitnow" : "WeWorkRemotely")
+          });
+        }
+      });
+    }
+  } catch (err) {
+    // jobs-enriched.json missing
+  }
+
+  return Array.from(jobsMap.values());
 }
 
 /**

@@ -1,22 +1,24 @@
 {
-  "target": "WeWorkRemotely + Arbeitnow",
-  "started_at": "2026-10-01T19:42:34.387Z",
-  "completed_at": "2026-10-01T19:42:35.078Z",
-  "duration_ms": 691,
+  "target": "Arbeitnow",
+  "started_at": "2026-10-02T05:32:55.842Z",
+  "completed_at": "2026-10-02T05:33:24.056Z",
+  "duration_ms": 28214,
   "pages_fetched": 2,
-  "cache_hits": 0,
-  "valid_records": 79,
-  "invalid_records": 0,
-  "failed_pages": 0,
-  "failed_urls": [],
+  "cache_hits": 2,
+  "valid_records": 93,
+  "invalid_records": 5,
+  "failed_pages": 5,
+  "failed_urls": [
+    "https://www.arbeitnow.com/jobs/companies/proglove/remote-junior-solution-architect-dach-112134",
+    "https://www.arbeitnow.com/jobs/companies/roadsurfer/freiburg-junior-fuhrparkleiter-freiburg-basel-413996",
+    "https://www.arbeitnow.com/jobs/companies/metergrid/junior-fullstack-developer-hamburg-452722",
+    "https://www.arbeitnow.com/jobs/companies/justwatch/junior-digital-pr-off-page-seo-berlin-400744",
+    "https://www.arbeitnow.com/jobs/companies/linear-service-gmbh/junior-full-stack-developer-nextjs-berlin-284166/apply"
+  ],
   "sources": {
-    "WeWorkRemotely": {
-      "fetched": 3,
-      "valid": 3
-    },
     "Arbeitnow": {
-      "fetched": 2,
-      "valid": 2
+      "fetched": 41,
+      "valid": 41
     }
   }
 }

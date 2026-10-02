@@ -33,39 +33,6 @@
       "confidence": 0.92,
       "one_sentence_summary": "Develop and maintain devops cloud systems as Senior Backend Engineer at Acme Corp.",
       "reason": "Classified as senior devops cloud based on specified technical qualifications."
-    },
-    "triage_metrics": {
-      "prompt_version": "v1"
-    }
-  },
-  {
-    "id": "425814a881ed356a",
-    "canonical_url": "https://weworkremotely.com/remote-jobs/globex-lead-frontend-developer",
-    "title": "Stealth AI Researcher",
-    "company": "Stealth Lab",
-    "source_site": "WeWorkRemotely",
-    "location": "Remote Worldwide",
-    "is_remote": true,
-    "job_type": "Contract",
-    "salary_min_usd": null,
-    "salary_max_usd": null,
-    "salary_raw": null,
-    "description": null,
-    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
-    "fetched_at": "2026-10-01T19:42:34.853Z",
-    "normalized_at": "2026-10-01T19:42:34.854Z",
-    "triage": {
-      "seniority": "unspecified",
-      "domain": "data_ai",
-      "workplace_type": "unspecified",
-      "visa_sponsorship": "unspecified",
-      "tech_stack": [],
-      "confidence": 0.92,
-      "one_sentence_summary": "Develop and maintain data ai systems as Stealth AI Researcher at Stealth Lab.",
-      "reason": "Classified as unspecified data ai based on specified technical qualifications."
-    },
-    "triage_metrics": {
-      "prompt_version": "v1"
     }
   },
   {
@@ -102,9 +69,6 @@
       "confidence": 0.92,
       "one_sentence_summary": "Develop and maintain devops cloud systems as Senior Backend Engineer at Acme Corp.",
       "reason": "Classified as senior devops cloud based on specified technical qualifications."
-    },
-    "triage_metrics": {
-      "prompt_version": "v1"
     }
   },
   {
@@ -141,39 +105,6 @@
       "confidence": 0.92,
       "one_sentence_summary": "Develop and maintain devops cloud systems as Senior Backend Engineer at Acme Corp.",
       "reason": "Classified as senior devops cloud based on specified technical qualifications."
-    },
-    "triage_metrics": {
-      "prompt_version": "v1"
-    }
-  },
-  {
-    "id": "10fcf7092b01bbc1",
-    "canonical_url": "https://weworkremotely.com/remote-jobs/toggl-senior-full-stack",
-    "title": "Senior Full Stack",
-    "company": "Toptal",
-    "location": "Remote",
-    "is_remote": true,
-    "job_type": "Full-Time",
-    "salary_min_usd": 100000,
-    "salary_max_usd": null,
-    "salary_raw": "$100,000 or more USD",
-    "description": null,
-    "source_page": "https://weworkremotely.com/categories/remote-full-stack-programming-jobs",
-    "fetched_at": "2026-09-29T19:30:37.012Z",
-    "normalized_at": "2026-09-29T19:30:37.016Z",
-    "source_site": "WeWorkRemotely",
-    "triage": {
-      "seniority": "senior",
-      "domain": "fullstack",
-      "workplace_type": "unspecified",
-      "visa_sponsorship": "unspecified",
-      "tech_stack": [],
-      "confidence": 0.92,
-      "one_sentence_summary": "Develop and maintain fullstack systems as Senior Full Stack at Toptal.",
-      "reason": "Classified as senior fullstack based on specified technical qualifications."
-    },
-    "triage_metrics": {
-      "prompt_version": "v1"
     }
   }
 ]
