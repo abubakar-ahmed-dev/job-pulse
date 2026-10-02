@@ -10,6 +10,11 @@
 
 Built for the **FlyRank Backend Internship**, combining **Assignment W5 (The Polite Scraper)** and **Assignment W7 (Put an LLM Behind Your API)** in the **JavaScript lane** (Node.js 20+, Express, Cheerio, Zod, and the OpenAI-compatible SDK).
 
+### 📋 Formal Assignment Submissions
+Detailed, stage-by-stage submission reports mapping all rubric requirements, architectural decisions, and verification proofs:
+* 📄 **[Week 5 Submission: The Polite Scraper](docs/submissions/W5_SUBMISSION_THE_POLITE_SCRAPER.md)** — Stages 0–6, robots audit, per-host caching, Zod normalization, failure survival, multi-board federation.
+* 📄 **[Week 7 Submission: Put an LLM Behind Your API](docs/submissions/W7_SUBMISSION_PUT_AN_LLM_BEHIND_YOUR_API.md)** — Stages 0–5, job card, 3-variable provider abstraction, 1x repair loop, cost logs, 8-case eval suite.
+
 ---
 
 ## 🎯 Target Classification & Web Ethics (W5 Stage 0)
